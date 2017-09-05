@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 public class home_screen extends AppCompatActivity {
 //John's Test
+    //Check if this is added on merge!!
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
