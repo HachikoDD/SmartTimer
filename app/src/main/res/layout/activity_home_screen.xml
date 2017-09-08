@@ -21,4 +21,11 @@
         design:menu="@menu/menu_bottomnavigation"
     />
 
+    <EditText
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date" />
+
 </android.support.design.widget.CoordinatorLayout>
