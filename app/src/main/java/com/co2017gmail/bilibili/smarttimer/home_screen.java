@@ -17,7 +17,7 @@ public class home_screen extends AppCompatActivity {
         TextView tvDisplayDate = (TextView) findViewById(R.id.tvDate);
         long date = System.currentTimeMillis();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM MM dd, yyyy h:mm a");
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM MM dd");
         String dateString = sdf.format(date);
         tvDisplayDate.setText(dateString);
     }
