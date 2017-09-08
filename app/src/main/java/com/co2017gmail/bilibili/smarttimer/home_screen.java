@@ -9,5 +9,6 @@ public class home_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-    }
+    }//test 2
+    
 }
