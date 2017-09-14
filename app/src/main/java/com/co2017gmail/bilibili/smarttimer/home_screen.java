@@ -25,7 +25,7 @@ public class home_screen extends AppCompatActivity {
         txtTimerHour = (TextView) findViewById(R.id.tv_timer_hour);
         txtTimerMinute = (TextView) findViewById(R.id.tv_timer_minute);
         txtTimerSecond = (TextView) findViewById(R.id.tv_timer_second);
-        tvEvent = (TextView) findViewById(R.id.tvEvent);
+        //tvEvent = (TextView) findViewById(R.id.tvEvent);
 
         countDownStart();
 
