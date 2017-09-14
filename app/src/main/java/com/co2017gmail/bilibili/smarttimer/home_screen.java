@@ -6,13 +6,14 @@ import android.widget.TextView;
 import android.os.Handler;
 import android.view.View;
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class home_screen extends AppCompatActivity {
 
     private TextView txtTimerHour, txtTimerMinute, txtTimerSecond;
-    private TextView tvEvent;
+    private TextView tvEvent, tvDate;
     private Handler handler;
     private Runnable runnable;
 
@@ -26,9 +27,18 @@ public class home_screen extends AppCompatActivity {
         txtTimerMinute = (TextView) findViewById(R.id.tv_timer_minute);
         txtTimerSecond = (TextView) findViewById(R.id.tv_timer_second);
         tvEvent = (TextView) findViewById(R.id.tvEvent);
+        tvDate = (TextView) findViewById(R.id.tvDate);
 
+        currentDate();
         countDownStart();
 
+    }
+
+    public void currentDate(){
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+
+        tvDate.setText(currentDateTimeString);
     }
 
     public void countDownStart() {
