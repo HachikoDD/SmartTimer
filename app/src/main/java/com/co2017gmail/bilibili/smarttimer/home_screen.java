@@ -1,6 +1,5 @@
 package com.co2017gmail.bilibili.smarttimer;
 
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.design.widget.BottomNavigationView;
 import android.support.annotation.NonNull;
@@ -20,6 +19,9 @@ public class home_screen extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.home:
                     mTextMessage.setText(R.string.title_home);
+                    HomeFragment homeFragment = new HomeFragment();
+                    android.app.FragmentManager manager1 = getFragmentManager();
+                    manager1.beginTransaction().replace(R.id.contentLayoutHome, homeFragment, homeFragment.getTag()).commit();
                     return true;
                 case R.id.schedule:
                     mTextMessage.setText(R.string.title_schedule);
