@@ -3,21 +3,25 @@
     <item
         android:title="Home"
         android:icon="@drawable/ic_home"
+        android:id="@+id/home"
         />
 
     <item
         android:title="Schedule"
         android:icon="@drawable/ic_schedule"
+        android:id="@+id/schedule"
         />
 
     <item
         android:title="Summary"
         android:icon="@drawable/ic_summary"
+        android:id="@+id/summary"
         />
 
     <item
         android:title="Me"
         android:icon="@drawable/ic_me"
+        android:id="@+id/me"
         />
 
 </menu>
