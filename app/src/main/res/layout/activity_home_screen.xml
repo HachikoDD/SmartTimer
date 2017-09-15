@@ -4,18 +4,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:design="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contentLayoutHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.co2017gmail.bilibili.smarttimer.home_screen">
 
     <android.support.design.widget.BottomNavigationView
+        android:id="@+id/BottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/BottomNavigation"
         android:layout_gravity="bottom"
-        design:menu="@menu/menu_bottomnavigation"
-    />
-    
+        design:menu="@menu/menu_bottomnavigation" />
+
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/title_home" />
 
     <EditText
         android:id="@+id/tvDate"
@@ -70,19 +80,19 @@
                     android:id="@+id/tv_timer_hour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
                     android:layout_gravity="top"
+                    android:layout_weight="1"
                     android:ems="10"
-                    android:text="1" />
+                    android:text="1"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/tvtimerhour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="top"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:layout_gravity="top"
                     android:text="hour" />
             </LinearLayout>
 
@@ -91,26 +101,26 @@
                 android:id="@+id/minute_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginTop="30dp"
                 android:layout_alignParentStart="true"
+                android:layout_marginTop="30dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_timer_minute"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:textAlignment="center"
-
                     android:ems="10"
-                    android:text="1" />
+
+                    android:text="1"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/tvtimerminute"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:ems="10"
                     android:text="minute" />
@@ -121,26 +131,26 @@
                 android:id="@+id/second_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginTop="60dp"
                 android:layout_alignParentStart="true"
+                android:layout_marginTop="60dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_timer_second"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:textAlignment="center"
-
                     android:ems="10"
-                    android:text="1" />
+
+                    android:text="1"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/tvtimersecond"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:ems="10"
                     android:text="second" />
@@ -151,18 +161,17 @@
 
     </LinearLayout>
 
-   <LinearLayout
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-       <TextView
-           android:id="@+id/tvEvent"
-           android:text="Out of time!"
-           android:layout_height="wrap_content"
-           android:layout_width="wrap_content"
-           />
+        <TextView
+            android:id="@+id/tvEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Out of time!" />
 
-   </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
