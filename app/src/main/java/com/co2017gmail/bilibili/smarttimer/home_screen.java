@@ -25,6 +25,9 @@ public class home_screen extends AppCompatActivity {
                     return true;
                 case R.id.schedule:
                     mTextMessage.setText(R.string.title_schedule);
+//                    ScheduleFragment scheduleFragment = new ScheduleFragment();
+//                    android.app.FragmentManager manager2 = getFragmentManager();
+//                    manager2.beginTransaction().replace(R.id.contentLayoutHome, scheduleFragment, scheduleFragement, scheduleFragement.getTag()).commit();
                     return true;
                 case R.id.summary:
                     mTextMessage.setText(R.string.title_summary);
