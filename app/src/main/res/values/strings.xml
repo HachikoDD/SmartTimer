@@ -1,3 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <resources>
     <string name="app_name">SmartTimer</string>
+    <string name="add">Add</string>
+    <string name="title_daily">Daily Schedule</string>
+    <string name="task1">8:00 - 10:00 Get up and Breakfast</string>
+    <string name="task2">10:00 - 11:00 INFO1000 Tutorial</string>
+    <string name="new_event">New Event</string>
+    <string name="edit_title">Title</string>
+    <string name="edit_location">Location</string>
+    <string name="edit_URL">URL</string>
+    <string name="edit_notes">Notes</string>
 </resources>
