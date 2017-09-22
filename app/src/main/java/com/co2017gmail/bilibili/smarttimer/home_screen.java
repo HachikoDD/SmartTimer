@@ -60,16 +60,6 @@ public class home_screen extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.BottomNavigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        txtTimerHour = (TextView) findViewById(R.id.tv_timer_hour);
-        txtTimerMinute = (TextView) findViewById(R.id.tv_timer_minute);
-        txtTimerSecond = (TextView) findViewById(R.id.tv_timer_second);
-        tvEvent = (TextView) findViewById(R.id.tvEvent);
-        tvDate = (TextView) findViewById(R.id.tvDate);
-
-        currentDate();
-        countDownStart();
-
     }
 
     public void currentDate(){
