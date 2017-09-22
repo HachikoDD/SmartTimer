@@ -4,7 +4,6 @@
     <string name="title_schedule">Schedule</string>
     <string name="title_summary">Summary</string>
     <string name="title_me">Me</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="time_span">Time Span</string>
+    <string name="last_time_used">Last Time used:</string>
 </resources>

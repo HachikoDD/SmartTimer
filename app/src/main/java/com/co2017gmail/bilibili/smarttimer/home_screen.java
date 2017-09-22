@@ -49,6 +49,12 @@ public class home_screen extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.BottomNavigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        if(savedInstanceState == null){
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container, HomeFragment.newInstance())
+                    .commit();
+        }
     }
 
 }
