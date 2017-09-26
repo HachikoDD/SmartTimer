@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
@@ -35,6 +37,9 @@ import static com.co2017gmail.bilibili.smarttimer.R.id.compactcalendar_view;
  */
 public class CalendarFragment extends Fragment{
 
+    private TextView theDate;
+    private Button btnGoCalendar;
+
     public CalendarFragment(){
 
     }
@@ -48,7 +53,7 @@ public class CalendarFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
             View view =  inflater.inflate(R.layout.fragment_calendar, container, false);
-
+//            theDate = (TextView)
 
         return view;
 

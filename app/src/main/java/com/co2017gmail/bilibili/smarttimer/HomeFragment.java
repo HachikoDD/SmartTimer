@@ -87,7 +87,7 @@ public class HomeFragment extends Fragment {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
                     // Only in this format //YYYY-MM-DD
-                    Date futureDate = dateFormat.parse("2017-09-16");  //Change to hour format
+                    Date futureDate = dateFormat.parse("2017-09-29");  //Change to hour format
                     Date currentDate = new Date();
 
                     if (!currentDate.after(futureDate)) {

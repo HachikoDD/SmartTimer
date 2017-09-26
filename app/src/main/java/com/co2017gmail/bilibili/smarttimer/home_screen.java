@@ -1,5 +1,6 @@
 package com.co2017gmail.bilibili.smarttimer;
 
+import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
@@ -21,35 +22,37 @@ public class home_screen extends AppCompatActivity {
     private Runnable runnable;
 
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.home:
-                    mTextMessage.setText(R.string.title_home);
-                    HomeFragment homeFragment = new HomeFragment();
-                    android.app.FragmentManager manager1 = getFragmentManager();
-                    manager1.beginTransaction().replace(R.id.contentLayoutHome, homeFragment, homeFragment.getTag()).commit();
-                    return true;
-                case R.id.schedule:
-                    mTextMessage.setText(R.string.title_schedule);
-                    return true;
-                case R.id.summary:
-                    mTextMessage.setText(R.string.title_summary);
-                    CalendarFragment calendarFragment = new CalendarFragment();
-                    android.app.FragmentManager manager3 = getFragmentManager();
-                    manager3.beginTransaction().replace(R.id.contentLayoutHome, calendarFragment, calendarFragment.getTag()).commit();
-                    return true;
-                case R.id.me:
-                    mTextMessage.setText(R.string.title_me);
-                    return true;
-            }
-            return false;
-        }
-
-    };
+//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+//            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+//
+//        @Override
+//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//            switch (item.getItemId()) {
+//                case R.id.home:
+//                    mTextMessage.setText(R.string.title_home);
+//                    HomeFragment homeFragment = new HomeFragment();
+//                    android.app.FragmentManager manager1 = getFragmentManager();
+//                    manager1.beginTransaction().replace(R.id.contentLayoutHome, homeFragment, homeFragment.getTag()).commit();
+//                    break;
+//                case R.id.schedule:
+//                    mTextMessage.setText(R.string.title_schedule);
+//                    break;
+//                case R.id.summary:
+//                    mTextMessage.setText(R.string.title_summary);
+//                    startActivity(new Intent(home_screen.this, calendar.class));
+//                    CalendarFragment calendarFragment = new CalendarFragment();
+//                    android.app.FragmentManager manager3 = getFragmentManager();
+//                    manager3.beginTransaction().replace(R.id.contentLayoutHome, calendarFragment, calendarFragment.getTag()).commit();
+//                    break;
+//                case R.id.me:
+//                    mTextMessage.setText(R.string.title_me);
+//                    break;
+//            }
+//            return true;
+//        }
+//
+//    };
 
 
 //    public void currentDate(){
@@ -112,15 +115,54 @@ public class home_screen extends AppCompatActivity {
         //currentDate();
         //countDownStart();
 
+        if(savedInstanceState == null){
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container, AppUsageStatisticsFragment.newInstance())
+                    .commit();
+        }
+
+//        BottomNavigationView bottomNavigationView =(BottomNavigationView) findViewById(R.id.BottomNavigation);
+//
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.schedule:
+//                        break;
+//                    case R.id.summary:
+//                        mTextMessage.setText(R.string.title_summary);
+//                        startActivity(new Intent(home_screen.this, calendar.class));
+//                        break;
+//                    case R.id.me:
+//                        mTextMessage.setText(R.string.title_me);
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
+
+        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+                = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.schedule:
+                        break;
+                    case R.id.summary:
+                        mTextMessage.setText(R.string.title_summary);
+                        startActivity(new Intent(home_screen.this, calendar.class));
+                        break;
+                    case R.id.me:
+                        mTextMessage.setText(R.string.title_me);
+                        break;
+                }
+                return true;
+            }
+
+        };
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.BottomNavigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-//        if(savedInstanceState == null){
-//            getFragmentManager().beginTransaction()
-//                    .add(R.id.container, HomeFragment.newInstance())
-//                    .commit();
-//        }
     }
 
 }
