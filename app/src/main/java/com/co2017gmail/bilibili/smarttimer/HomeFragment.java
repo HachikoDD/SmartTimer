@@ -25,22 +25,7 @@ import java.util.Date;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-
-    //NEW
-    private static final String TAG = HomeFragment.class.getSimpleName();
-
-    //VisibleForTesting
-    UsageStatsManager mUsageStatsManager;
-    UsageListAdapter mUsageListAdapter;
-    RecyclerView mRecyclerView;
-    RecyclerView.LayoutManager mLayoutManager;
-    Button mOpenUsageSettingButton;
-    Spinner mSpinner;
-
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        return fragment;
-    }
+    
 
     //NOT NEW
     public HomeFragment() {
@@ -54,35 +39,35 @@ public class HomeFragment extends Fragment {
     private Runnable runnable;
 
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.home:
-                    mTextMessage.setText(R.string.title_home);
-                    HomeFragment homeFragment = new HomeFragment();
-                    android.app.FragmentManager manager1 = getFragmentManager();
-                    manager1.beginTransaction().replace(R.id.contentLayoutHome, homeFragment, homeFragment.getTag()).commit();
-                    return true;
-                case R.id.schedule:
-                    mTextMessage.setText(R.string.title_schedule);
-                    return true;
-                case R.id.summary:
-                    mTextMessage.setText(R.string.title_summary);
-                    CalendarFragment calendarFragment = new CalendarFragment();
-                    android.app.FragmentManager manager3 = getFragmentManager();
-                    manager3.beginTransaction().replace(R.id.contentLayoutHome, calendarFragment, calendarFragment.getTag()).commit();
-                    return true;
-                case R.id.me:
-                    mTextMessage.setText(R.string.title_me);
-                    return true;
-            }
-            return false;
-        }
-
-    };
+//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+//            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+//
+//        @Override
+//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//            switch (item.getItemId()) {
+//                case R.id.home:
+//                    mTextMessage.setText(R.string.title_home);
+//                    HomeFragment homeFragment = new HomeFragment();
+//                    android.app.FragmentManager manager1 = getFragmentManager();
+//                    manager1.beginTransaction().replace(R.id.contentLayoutHome, homeFragment, homeFragment.getTag()).commit();
+//                    return true;
+//                case R.id.schedule:
+//                    mTextMessage.setText(R.string.title_schedule);
+//                    return true;
+//                case R.id.summary:
+//                    mTextMessage.setText(R.string.title_summary);
+//                    CalendarFragment calendarFragment = new CalendarFragment();
+//                    android.app.FragmentManager manager3 = getFragmentManager();
+//                    manager3.beginTransaction().replace(R.id.contentLayoutHome, calendarFragment, calendarFragment.getTag()).commit();
+//                    return true;
+//                case R.id.me:
+//                    mTextMessage.setText(R.string.title_me);
+//                    return true;
+//            }
+//            return false;
+//        }
+//
+//    };
 
     public void currentDate(){
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
@@ -159,9 +144,9 @@ public class HomeFragment extends Fragment {
         currentDate();
         countDownStart();
 
-        mTextMessage = (TextView) view.findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) view.findViewById(R.id.BottomNavigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+//        mTextMessage = (TextView) view.findViewById(R.id.message);
+//        BottomNavigationView navigation = (BottomNavigationView) view.findViewById(R.id.BottomNavigation);
+//        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
         return view;
