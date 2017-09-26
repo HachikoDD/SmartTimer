@@ -25,7 +25,7 @@ import java.util.Date;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-    
+
 
     //NOT NEW
     public HomeFragment() {
