@@ -1,6 +1,7 @@
 package com.co2017gmail.bilibili.smarttimer;
 
 
+import android.annotation.SuppressLint;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -29,17 +30,18 @@ public class CalendarFragment extends Fragment {
     private SimpleDateFormat dateFormatMonth = new SimpleDateFormat ("MMMM-yyyy", Locale.getDefault());
 
     public CalendarFragment()  {
-        // Required empty public constructor
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view =  inflater.inflate(R.layout.fragment_calendar, container, false);
 
-//        Event ev1 = new Event(Color.RED, 1504321597, "test");
-//        compactCalendar.addEvent(ev1);
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.calendar, container, false);
+//        final ActionBar actionBar = g
+
+        return view;
     }
+
 }

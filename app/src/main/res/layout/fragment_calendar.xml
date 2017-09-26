@@ -6,11 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.co2017gmail.bilibili.smarttimer.CalendarFragment">
 
-    <com.github.sundeepk.compactcalendarview.CompactCalendarView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.github.sundeepk.compactcalendarview.CompactCalendarView
         android:id="@+id/compactcalendar_view"
         android:layout_width="0dp"
         android:layout_height="250dp"
-        android:layout_marginTop="-53dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         app:compactCalendarBackgroundColor="#ffe95451"
@@ -27,5 +26,172 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="260dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/editText12"
+        android:layout_width="176dp"
+        android:layout_height="44dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="WEEKLY RANKING"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/compactcalendar_view" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="318dp"
+        android:layout_height="180dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginStart="1dp"
+        android:clipToPadding="false"
+        android:fillViewport="false"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText12"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1">
+
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="193dp"
+            tools:layout_editor_absoluteY="350dp">
+
+            <EditText
+                android:id="@+id/editText26"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText27"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Name" />
+        </LinearLayout>
+
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
