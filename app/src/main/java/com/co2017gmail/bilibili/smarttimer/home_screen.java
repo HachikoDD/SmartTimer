@@ -20,7 +20,7 @@ public class home_screen extends AppCompatActivity {
 //    private Handler handler;
 //    private Runnable runnable;
 
-
+//
 //    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 //            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 //
