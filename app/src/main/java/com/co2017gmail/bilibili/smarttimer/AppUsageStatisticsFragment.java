@@ -42,6 +42,7 @@ import static android.app.AppOpsManager.OPSTR_GET_USAGE_STATS;
 public class AppUsageStatisticsFragment extends Fragment {
     //NEW
     private static final String TAG = AppUsageStatisticsFragment.class.getSimpleName();
+    private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 100;
 
     //VisibleForTesting
     UsageStatsManager mUsageStatsManager;
@@ -67,7 +68,7 @@ public class AppUsageStatisticsFragment extends Fragment {
         //noinspection ResourceType
         mUsageStatsManager = (UsageStatsManager) getActivity()
                 .getSystemService("usagestats"); //Context.USAGE_STATS_SERVICE
-        
+
     }
 
     @Override
@@ -149,7 +150,8 @@ public class AppUsageStatisticsFragment extends Fragment {
                 mOpenUsageSettingButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+                        startActivityForResult(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS), MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
+                        //startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
                     }
                 });
             }
