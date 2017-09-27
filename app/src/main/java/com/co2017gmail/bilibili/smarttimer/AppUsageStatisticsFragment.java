@@ -139,8 +139,6 @@ public class AppUsageStatisticsFragment extends Fragment {
                 .queryUsageStats(intervalType, cal.getTimeInMillis(),
                         System.currentTimeMillis());
 
-        //new if
-          if (hasPermission()) {
             if (queryUsageStats.size() == 0) {
                 Log.i(TAG, "The user may not allow the access to apps usage. ");
                 Toast.makeText(getActivity(),
@@ -151,11 +149,9 @@ public class AppUsageStatisticsFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         startActivityForResult(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS), MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
-                        //startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
                     }
                 });
-            }
-        } //
+        }
         return queryUsageStats;
     }
 

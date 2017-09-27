@@ -21,40 +21,6 @@ public class home_screen extends AppCompatActivity {
     private Handler handler;
     private Runnable runnable;
 
-
-
-//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-//            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-//
-//        @Override
-//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//            switch (item.getItemId()) {
-//                case R.id.home:
-//                    mTextMessage.setText(R.string.title_home);
-//                    HomeFragment homeFragment = new HomeFragment();
-//                    android.app.FragmentManager manager1 = getFragmentManager();
-//                    manager1.beginTransaction().replace(R.id.contentLayoutHome, homeFragment, homeFragment.getTag()).commit();
-//                    break;
-//                case R.id.schedule:
-//                    mTextMessage.setText(R.string.title_schedule);
-//                    break;
-//                case R.id.summary:
-//                    mTextMessage.setText(R.string.title_summary);
-//                    startActivity(new Intent(home_screen.this, calendar.class));
-//                    CalendarFragment calendarFragment = new CalendarFragment();
-//                    android.app.FragmentManager manager3 = getFragmentManager();
-//                    manager3.beginTransaction().replace(R.id.contentLayoutHome, calendarFragment, calendarFragment.getTag()).commit();
-//                    break;
-//                case R.id.me:
-//                    mTextMessage.setText(R.string.title_me);
-//                    break;
-//            }
-//            return true;
-//        }
-//
-//    };
-
-
 //    public void currentDate(){
 //        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 //
