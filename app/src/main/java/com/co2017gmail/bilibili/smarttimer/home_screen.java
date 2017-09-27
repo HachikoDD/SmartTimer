@@ -162,6 +162,7 @@ public class home_screen extends AppCompatActivity {
         };
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.BottomNavigation);
+        navigation.setSelectedItemId(R.id.home);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
