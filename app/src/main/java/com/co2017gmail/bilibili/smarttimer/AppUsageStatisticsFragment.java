@@ -126,7 +126,7 @@ public class AppUsageStatisticsFragment extends Fragment {
 //                Manifest.permission.PACKAGE_USAGE_STATS) == PackageManager.PERMISSION_GRANTED;
     }
 
-
+//
  ////////////////////////////******GET STATS*****////////////////////////////
 
     public List<UsageStats> getUsageStatistics(int intervalType) {
