@@ -120,12 +120,6 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-//        if(savedInstanceState == null){
-//            getFragmentManager().beginTransaction()
-//                    .add(R.id.container, HomeFragment.newInstance())
-//                    .commit();
-//        }
     }
 
 
