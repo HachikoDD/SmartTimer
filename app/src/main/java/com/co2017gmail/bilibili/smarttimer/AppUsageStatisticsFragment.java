@@ -136,8 +136,10 @@ public class AppUsageStatisticsFragment extends Fragment {
         cal.add(Calendar.YEAR, -1);
 
         List<UsageStats> queryUsageStats = mUsageStatsManager
-                .queryUsageStats(intervalType, cal.getTimeInMillis(),
+                .queryUsageStats(UsageStatsManager.INTERVAL_DAILY, cal.getTimeInMillis(), //.queryUsageStats(intervalType, cal.getTimeInMillis(),
+
                         System.currentTimeMillis());
+
 
             if (queryUsageStats.size() == 0) {
                 Log.i(TAG, "The user may not allow the access to apps usage. ");
@@ -149,9 +151,10 @@ public class AppUsageStatisticsFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         startActivityForResult(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS), MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
+                        //startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
                     }
                 });
-        }
+            }
         return queryUsageStats;
     }
 
