@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
+
 
 import static android.app.AppOpsManager.MODE_ALLOWED;
 import static android.app.AppOpsManager.OPSTR_GET_USAGE_STATS;
@@ -67,6 +67,7 @@ public class AppUsageStatisticsFragment extends Fragment {
         //noinspection ResourceType
         mUsageStatsManager = (UsageStatsManager) getActivity()
                 .getSystemService("usagestats"); //Context.USAGE_STATS_SERVICE
+        
     }
 
     @Override
@@ -112,16 +113,23 @@ public class AppUsageStatisticsFragment extends Fragment {
         });
     }
 
-//    private boolean checkForPermission(Context context) {
-//        AppOpsManager appOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-//        int mode = appOps.checkOpNoThrow(OPSTR_GET_USAGE_STATS, Process.myUid(), context.getPackageName());
-//        return mode == MODE_ALLOWED;
-//    }
+////////////////////////////******USER PERMISSION*****////////////////////////////
+
+    private boolean hasPermission() {
+        AppOpsManager appOps = (AppOpsManager)getActivity()//not original
+                .getSystemService(Context.APP_OPS_SERVICE);
+        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(),getActivity().getPackageName());
+        return mode == AppOpsManager.MODE_ALLOWED;
+//        return ContextCompat.checkSelfPermission(this,
+//                Manifest.permission.PACKAGE_USAGE_STATS) == PackageManager.PERMISSION_GRANTED;
+    }
+
+
+ ////////////////////////////******GET STATS*****////////////////////////////
 
     public List<UsageStats> getUsageStatistics(int intervalType) {
         // Get the app statistics since one year ago from the current time.
-
-//        startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -1);
@@ -130,20 +138,22 @@ public class AppUsageStatisticsFragment extends Fragment {
                 .queryUsageStats(intervalType, cal.getTimeInMillis(),
                         System.currentTimeMillis());
 
-
-//        if (queryUsageStats.size() == 0) {
-//            Log.i(TAG, "The user may not allow the access to apps usage. ");
-//            Toast.makeText(getActivity(),
-//                    getString(R.string.explanation_access_to_appusage_is_not_enabled),
-//                    Toast.LENGTH_LONG).show();
-//            mOpenUsageSettingButton.setVisibility(View.VISIBLE);
-//            mOpenUsageSettingButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
-//                }
-//            });
-//        }
+        //new if
+          if (hasPermission()) {
+            if (queryUsageStats.size() == 0) {
+                Log.i(TAG, "The user may not allow the access to apps usage. ");
+                Toast.makeText(getActivity(),
+                        getString(R.string.explanation_access_to_appusage_is_not_enabled),
+                        Toast.LENGTH_LONG).show();
+                mOpenUsageSettingButton.setVisibility(View.VISIBLE);
+                mOpenUsageSettingButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+                    }
+                });
+            }
+        } //
         return queryUsageStats;
     }
 
