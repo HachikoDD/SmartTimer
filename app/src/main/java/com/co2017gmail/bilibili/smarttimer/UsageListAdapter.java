@@ -79,7 +79,14 @@ public class UsageListAdapter extends RecyclerView.Adapter<UsageListAdapter.View
         seconds = (int) (TimeInforground / 1000) % 60;
 
         hours = (int) ((TimeInforground / (1000 * 60 * 60)) % 24);
-        viewHolder.getLastTimeUsed().setText(hours + "h" + ":" + minutes + "m" + seconds + "s");
+        if(hours==0&&minutes==0){
+            viewHolder.getLastTimeUsed().setText(seconds + "s");
+        }
+        else if(hours==0){
+            viewHolder.getLastTimeUsed().setText(minutes + "m" + seconds + "s");
+        }
+        else
+            viewHolder.getLastTimeUsed().setText(hours + "h" + minutes + "m" + seconds + "s");
         viewHolder.getAppIcon().setImageDrawable(mCustomUsageStatsList.get(position).appIcon);
 
     }
