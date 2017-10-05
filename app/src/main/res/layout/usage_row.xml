@@ -36,7 +36,7 @@
                     android:id="@+id/textview_last_time_used_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/last_time_used"
+                    android:text="@string/used"
                     />
 
                 <TextView
