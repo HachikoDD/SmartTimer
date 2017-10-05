@@ -2,6 +2,7 @@ package com.co2017gmail.bilibili.smarttimer;
 
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
+import android.content.pm.ResolveInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -44,8 +45,6 @@ public class AppUsageStatisticsFragment extends Fragment {
     private static final String TAG1 = "AppUsageStatisticsFragm";
     private static final String TAG = AppUsageStatisticsFragment.class.getSimpleName();
     private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 100;
-    private long start = 1506470400000L;
-    private
 
     //VisibleForTesting
     UsageStatsManager mUsageStatsManager;
@@ -162,10 +161,13 @@ public class AppUsageStatisticsFragment extends Fragment {
 
     void updateAppsList(List<UsageStats> usageStatsList) {
         List<CustomUsageStats> customUsageStatsList = new ArrayList<>();
+
         for (int i = 0; i < usageStatsList.size(); i++) {
             CustomUsageStats customUsageStats = new CustomUsageStats();
             customUsageStats.usageStats = usageStatsList.get(i);
-            if(customUsageStats.usageStats.getLastTimeUsed()>970725976000L) {
+            Context context= getActivity();
+            String appname = getAppNameFromPackage(customUsageStats.usageStats.getPackageName(),context);
+            if(customUsageStats.usageStats.getLastTimeUsed()>970725976000L&&appname!=null) {
                 try {
                     Drawable appIcon = getActivity().getPackageManager()
                             .getApplicationIcon(customUsageStats.usageStats.getPackageName());
@@ -188,7 +190,7 @@ public class AppUsageStatisticsFragment extends Fragment {
 
         @Override
         public int compare(UsageStats left, UsageStats right) {
-            return Long.compare(right.getLastTimeUsed(), left.getLastTimeUsed());
+            return Long.compare(right.getTotalTimeInForeground(), left.getTotalTimeInForeground());
         }
     }
 
@@ -214,6 +216,19 @@ public class AppUsageStatisticsFragment extends Fragment {
             }
             return null;
         }
+    }
+
+    private String getAppNameFromPackage(String packageName, Context context) {
+        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
+        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        List<ResolveInfo> pkgAppsList = context.getPackageManager()
+                .queryIntentActivities(mainIntent, 0);
+        for (ResolveInfo app : pkgAppsList) {
+            if (app.activityInfo.packageName.equals(packageName)) {
+                return app.activityInfo.loadLabel(context.getPackageManager()).toString();
+            }
+        }
+        return null;
     }
 
 }

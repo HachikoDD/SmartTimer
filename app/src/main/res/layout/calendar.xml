@@ -7,7 +7,7 @@
     android:id="@+id/contentLayoutHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background"
     tools:context="com.co2017gmail.bilibili.smarttimer.home_screen">
 
         <android.support.design.widget.BottomNavigationView
