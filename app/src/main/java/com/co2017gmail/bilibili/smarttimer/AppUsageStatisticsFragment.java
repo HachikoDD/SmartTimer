@@ -41,8 +41,11 @@ import static android.app.AppOpsManager.OPSTR_GET_USAGE_STATS;
 
 public class AppUsageStatisticsFragment extends Fragment {
     //NEW
+    private static final String TAG1 = "AppUsageStatisticsFragm";
     private static final String TAG = AppUsageStatisticsFragment.class.getSimpleName();
     private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 100;
+    private long start = 1506470400000L;
+    private
 
     //VisibleForTesting
     UsageStatsManager mUsageStatsManager;
@@ -136,10 +139,9 @@ public class AppUsageStatisticsFragment extends Fragment {
         cal.add(Calendar.YEAR, -1);
 
         List<UsageStats> queryUsageStats = mUsageStatsManager
-                .queryUsageStats(UsageStatsManager.INTERVAL_DAILY, cal.getTimeInMillis(), //.queryUsageStats(intervalType, cal.getTimeInMillis(),
+                .queryUsageStats(UsageStatsManager.INTERVAL_DAILY, System.currentTimeMillis()-1000*10, //.queryUsageStats(intervalType, cal.getTimeInMillis(),
 
                         System.currentTimeMillis());
-
 
             if (queryUsageStats.size() == 0) {
                 Log.i(TAG, "The user may not allow the access to apps usage. ");
@@ -163,17 +165,19 @@ public class AppUsageStatisticsFragment extends Fragment {
         for (int i = 0; i < usageStatsList.size(); i++) {
             CustomUsageStats customUsageStats = new CustomUsageStats();
             customUsageStats.usageStats = usageStatsList.get(i);
-            try {
-                Drawable appIcon = getActivity().getPackageManager()
-                        .getApplicationIcon(customUsageStats.usageStats.getPackageName());
-                customUsageStats.appIcon = appIcon;
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.w(TAG, String.format("App Icon is not found for %s",
-                        customUsageStats.usageStats.getPackageName()));
-                customUsageStats.appIcon = getActivity()
-                        .getDrawable(R.drawable.ic_default_app_launcher);
+            if(customUsageStats.usageStats.getLastTimeUsed()>970725976000L) {
+                try {
+                    Drawable appIcon = getActivity().getPackageManager()
+                            .getApplicationIcon(customUsageStats.usageStats.getPackageName());
+                    customUsageStats.appIcon = appIcon;
+                } catch (PackageManager.NameNotFoundException e) {
+                    Log.w(TAG, String.format("App Icon is not found for %s",
+                            customUsageStats.usageStats.getPackageName()));
+                    customUsageStats.appIcon = getActivity()
+                            .getDrawable(R.drawable.ic_default_app_launcher);
+                }
+                customUsageStatsList.add(customUsageStats);
             }
-            customUsageStatsList.add(customUsageStats);
         }
         mUsageListAdapter.setCustomUsageStatsList(customUsageStatsList);
         mUsageListAdapter.notifyDataSetChanged();
