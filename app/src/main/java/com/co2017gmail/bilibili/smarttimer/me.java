@@ -30,6 +30,7 @@ public class me extends AppCompatActivity {
                         startActivity(new Intent(me.this, home_screen.class));
                         break;
                     case R.id.schedule:
+                        startActivity(new Intent(me.this, schedule.class));
                         break;
                     case R.id.summary:
                         startActivity(new Intent(me.this, calendar.class));

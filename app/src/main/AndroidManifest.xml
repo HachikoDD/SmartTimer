@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.co2017gmail.bilibili.smarttimer">
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore = "ProtectedPermissions">
 
+    </uses-permission>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,9 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".createNew"
-            android:label="new">
-        </activity>
+        <activity android:name=".createNew"></activity>
+        <activity android:name=".schedule"></activity>
+        <activity android:name=".calendar"></activity>
+        <activity android:name=".me"></activity>
+        <activity android:name=".detail_summary"></activity>
     </application>
 
 </manifest>

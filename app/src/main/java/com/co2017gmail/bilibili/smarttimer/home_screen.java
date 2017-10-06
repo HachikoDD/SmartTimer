@@ -113,6 +113,7 @@ public class home_screen extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.schedule:
+                        startActivity(new Intent(home_screen.this, schedule.class));
                         break;
                     case R.id.summary:
                         mTextMessage.setText(R.string.title_summary);

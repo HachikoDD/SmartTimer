@@ -50,7 +50,7 @@ public class calendar extends AppCompatActivity{
                         startActivity(new Intent(calendar.this, home_screen.class));
                         break;
                     case R.id.schedule:
-
+                        startActivity(new Intent(calendar.this, schedule.class));
                         break;
                     case R.id.me:
                         startActivity(new Intent(calendar.this, me.class));

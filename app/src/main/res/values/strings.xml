@@ -10,6 +10,14 @@
     <string name="edit_location">Location</string>
     <string name="edit_URL">URL</string>
     <string name="edit_notes">Notes</string>
+    <string name="title_home">Home</string>
+    <string name="title_schedule">Schedule</string>
+    <string name="title_summary">Summary</string>
+    <string name="title_me">Me</string>
+    <string name="time_span">Time Span</string>
+    <string name="used">Used:</string>
+    <string name="open_app_usage_setting">Open Apps with usage access settings</string>
+    <string name="explanation_access_to_appusage_is_not_enabled">Failed to retrieve app usage statistics. You may need to enable access for this app through Setting > Security > Apps with usage access</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
