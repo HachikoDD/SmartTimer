@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/BottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        design:menu="@menu/menu_bottomnavigation" />
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="144dp"
+                    android:layout_height="31dp"
+                    android:inputType="textMultiLine"
+                    android:lines="2"
+                    android:text="UserName"
+                    android:layout_marginVertical="20dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="45dp"
+                    android:layout_toEndOf="@+id/profile" />
+
+                <ImageView
+                    android:id="@+id/profile"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_profile_photo" />
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="144dp"
+                    android:layout_height="31dp"
+                    android:layout_marginTop="70dp"
+                    android:inputType="textPersonName"
+                    android:text="Lalalalala~"
+                    android:layout_marginStart="24dp"
+                    android:layout_toEndOf="@+id/profile" />
+
+                <Button
+                    android:id="@+id/imageView_edit"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="300dp"
+                    android:layout_marginTop="123dp"
+                    android:background="@drawable/ic_edit_button" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="335dp"
+                    android:layout_marginRight="100dp"
+                    android:layout_marginTop="130dp"
+                    android:text="Edit" />
+
+                <View
+                    android:id="@+id/break1"
+                    android:layout_width="340dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginLeft="25dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_below="@+id/profile" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/space" />
+
+                <TextView
+                    android:id="@+id/notifications"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Notifications"
+                    android:layout_below="@+id/break1"/>
+
+                <Switch
+                    android:id="@+id/switch_notif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="325dp"
+                    android:layout_marginTop="16dp"
+                    android:checked="true"
+                    android:layout_below="@+id/break1"/>
+
+                <TextView
+                    android:id="@+id/notifications_content"
+                    android:layout_width="300dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="40dp"
+                    android:text="Turn on to get notifications about schedules and exceeded usage"
+                    android:layout_below="@+id/break1"/>
+
+                <TextView
+                    android:id="@+id/restrictions"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="87dp"
+                    android:text="Restrictions"
+                    android:layout_below="@+id/break1"/>
+
+                <Switch
+                    android:id="@+id/switch_restr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="325dp"
+                    android:layout_marginTop="83dp"
+                    android:checked="true"
+                    android:layout_below="@+id/break1"/>
+
+                <TextView
+                    android:id="@+id/restrictions_content"
+                    android:layout_width="305dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="107dp"
+                    android:text="Turn on to limit the phone usage"
+                    android:layout_below="@+id/break1"/>
+
+                <TextView
+                    android:id="@+id/widget"
+                    android:layout_width="120dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="138dp"
+                    android:text="Widget"
+                    android:layout_below="@+id/break1"/>
+
+                <Switch
+                    android:id="@+id/switch_widget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="325dp"
+                    android:layout_marginTop="132dp"
+                    android:checked="true"
+                    android:layout_below="@+id/break1"/>
+
+                <TextView
+                    android:id="@+id/widget_content"
+                    android:layout_width="300dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="158dp"
+                    android:text="Turn on to have a timer widget on your screen"
+                    android:layout_below="@+id/break1"/>
+
+                <View
+                    android:id="@+id/break2"
+                    android:layout_width="340dp"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="25dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_below="@+id/widget" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/select"
+                    android:layout_width="332dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="25dp"
+                    android:text="Select the apps you wish to have usage limitations"
+                    android:layout_below="@+id/break2"/>
+
+                <View
+                    android:id="@+id/break3"
+                    android:layout_width="340dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="25dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_below="@+id/select" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/space"
+                    android:layout_toEndOf="@+id/space">
+
+                </android.support.constraint.ConstraintLayout>
+
+
+            </RelativeLayout>
+
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

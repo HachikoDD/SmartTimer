@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".calendar"></activity>
         <activity android:name=".detail_summary"></activity>
+        <activity android:name=".me"></activity>
     </application>
 
 </manifest>

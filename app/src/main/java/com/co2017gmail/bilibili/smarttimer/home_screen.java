@@ -120,6 +120,7 @@ public class home_screen extends AppCompatActivity {
                         break;
                     case R.id.me:
                         mTextMessage.setText(R.string.title_me);
+                        startActivity(new Intent(home_screen.this, me.class));
                         break;
                 }
                 return true;

@@ -53,7 +53,7 @@ public class calendar extends AppCompatActivity{
 
                         break;
                     case R.id.me:
-
+                        startActivity(new Intent(calendar.this, me.class));
                         break;
                 }
                 return true;
