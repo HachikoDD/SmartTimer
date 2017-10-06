@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".createNew" />
+        <activity android:name=".createNew"
+            android:label="new">
+        </activity>
     </application>
 
 </manifest>
