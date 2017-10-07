@@ -17,7 +17,7 @@ public class createNew extends AppCompatActivity {
         setContentView(R.layout.activity_create_new);
         okListenerOnButton();
         cancelListenerOnButton();
-//        Intent intent = getIntent();
+        Intent intent = getIntent();
     }
 
 //    @Override
