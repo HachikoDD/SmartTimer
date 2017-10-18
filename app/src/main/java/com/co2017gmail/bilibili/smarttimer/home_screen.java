@@ -1,10 +1,10 @@
 package com.co2017gmail.bilibili.smarttimer;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.design.widget.BottomNavigationView;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +14,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
-public class home_screen extends AppCompatActivity {
+
+public class home_screen extends AppCompatActivity{
 
     private TextView mTextMessage;
     private TextView txtTimerHour, txtTimerMinute, txtTimerSecond;
@@ -114,6 +115,7 @@ public class home_screen extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.BottomNavigation);
         navigation.setSelectedItemId(R.id.home);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
     }
 
 }

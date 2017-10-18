@@ -156,7 +156,7 @@
                 android:layout_below="@+id/break1"
                 android:layout_marginLeft="280dp"
                 android:layout_marginTop="132dp"
-                android:checked="true" />
+                android:checked="false" />
 
             <TextView
                 android:id="@+id/widget_content"

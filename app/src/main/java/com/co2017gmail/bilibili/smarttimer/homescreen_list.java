@@ -151,6 +151,7 @@ public class homescreen_list extends Fragment {
                         customUsageStats.appIcon = getActivity()
                                 .getDrawable(R.drawable.ic_default_app_launcher);
                     }
+                    if(applicationDB.find(context,appname)!=null)
                     if(applicationDB.find(context,appname).monitorSwitch) {
                         customUsageStatsList.add(customUsageStats);
                     }
