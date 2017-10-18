@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "2142603735",
+    "firebase_url": "https://smarttimer-323df.firebaseio.com",
+    "project_id": "smarttimer-323df",
+    "storage_bucket": "smarttimer-323df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2142603735:android:c1a5954df9dd95d7",
+        "android_client_info": {
+          "package_name": "com.co2017gmail.bilibili.smarttimer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2142603735-066r1u4sbusnvc85obm098hj1kcepmgf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.co2017gmail.bilibili.smarttimer",
+            "certificate_hash": "ba38baf7ab69b10200bce03b3d403fa254d619bc"
+          }
+        },
+        {
+          "client_id": "2142603735-ad5t8r7olblqqmervmkns1lv2ibr7avk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAizA4M9Ma-fR9e0kUyEtiaMfiv9V8u_es"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2142603735-ad5t8r7olblqqmervmkns1lv2ibr7avk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

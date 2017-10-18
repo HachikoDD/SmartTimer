@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.provider.MediaStore;
 import android.net.Uri;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,6 +29,9 @@ import java.util.List;
 public class me extends AppCompatActivity implements View.OnClickListener {
 
     private static final int RESULT_LOAD_IMAGE = 1;
+    private static SeekBar seekBar;
+    private static TextView textView;
+    UserDB userDB;
     ImageView profile;
 
     @Override
@@ -39,6 +44,7 @@ public class me extends AppCompatActivity implements View.OnClickListener {
                     .add(R.id.container, AppUsageStatisticsFragment.newInstance())
                     .commit();
         }
+        seekbar();
 
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
                 = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -79,6 +85,34 @@ public class me extends AppCompatActivity implements View.OnClickListener {
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
                 break;
         }
+    }
+
+    public void seekbar(){
+        seekBar = (SeekBar) findViewById(R.id.limited_time_seek_bar);
+        seekBar.setMax(180);
+        textView = (TextView) findViewById(R.id.time_to_show);
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progress_valule;
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                progress_valule = i;
+
+                textView.setText(progress_valule+"/"+seekBar.getMax());
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                textView.setText(progress_valule+"/"+seekBar.getMax());
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                textView.setText(progress_valule+"/"+seekBar.getMax());
+            }
+        });
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

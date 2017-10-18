@@ -45,15 +45,6 @@
                 android:layout_marginTop="25dp"
                 android:src="@drawable/ic_profile_photo" />
 
-            <!--<Button
-                    android:id="@+id/upload"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="145dp"
-                    android:text="upload"
-                    android:background="@android:color/white"/>-->
-
             <TextView
                 android:id="@+id/status"
                 android:layout_width="144dp"
@@ -191,21 +182,31 @@
 
             <TextView
                 android:id="@+id/select"
-                android:layout_width="332dp"
+                android:layout_width="140dp"
                 android:layout_height="20dp"
                 android:layout_below="@+id/break2"
                 android:layout_marginLeft="25dp"
+                android:layout_marginRight="30dp"
                 android:layout_marginTop="15dp"
-                android:text="Select the apps you wish to have usage limitations" />
+                android:textSize="@dimen/margin_medium"
+                android:text="Usage Limitations" />
 
-            <View
-                android:id="@+id/break3"
-                android:layout_width="340dp"
-                android:layout_height="1dp"
+            <TextView
+                android:id="@+id/time_to_show"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/break2"
+                android:layout_marginLeft="220dp"
+                android:layout_marginRight="30dp"
+                android:textSize="@dimen/margin_large"
+                 />
+
+            <SeekBar
+                android:id="@+id/limited_time_seek_bar"
+                android:layout_width="350dp"
+                android:layout_height="30dp"
                 android:layout_below="@+id/select"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="5dp"
-                android:background="@android:color/darker_gray" />
+                android:layout_centerHorizontal="true" />
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -215,18 +216,13 @@
 
             </android.support.constraint.ConstraintLayout>
 
-            <SeekBar
-                android:id="@+id/limited_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/container"
-                android:layout_alignParentStart="true" />
+
 
             <FrameLayout
                 android:id="@+id/container"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_below="@+id/break3"
+                android:layout_below="@+id/limited_time_seek_bar"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="0dp"
