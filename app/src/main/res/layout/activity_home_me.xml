@@ -35,7 +35,7 @@
                 android:layout_toEndOf="@+id/profile"
                 android:inputType="textMultiLine"
                 android:lines="2"
-                android:text="UserName" />
+                android:text="BiliBili" />
 
             <ImageView
                 android:id="@+id/profile"
@@ -59,7 +59,7 @@
                 android:id="@+id/imageView_edit"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="300dp"
+                android:layout_marginLeft="270dp"
                 android:layout_marginTop="123dp"
                 android:background="@drawable/ic_edit_button" />
 
@@ -67,7 +67,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="120dp"
                 android:layout_height="45dp"
-                android:layout_marginLeft="335dp"
+                android:layout_marginLeft="300dp"
                 android:layout_marginRight="100dp"
                 android:layout_marginTop="130dp"
                 android:text="Edit" />
@@ -97,10 +97,10 @@
 
             <Switch
                 android:id="@+id/switch_notif"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/break1"
-                android:layout_marginLeft="325dp"
+                android:layout_marginLeft="280dp"
                 android:layout_marginTop="16dp"
                 android:checked="true" />
 
@@ -108,10 +108,10 @@
                 android:id="@+id/notifications_content"
                 android:layout_width="300dp"
                 android:layout_height="45dp"
-                android:layout_below="@+id/break1"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="40dp"
-                android:text="Turn on to get notifications about schedules and exceeded usage" />
+                android:text="Turn on to get notifications about schedules and exceeded usage"
+                android:layout_below="@+id/switch_notif"
+                android:layout_alignStart="@+id/notifications" />
 
             <TextView
                 android:id="@+id/restrictions"
@@ -124,10 +124,10 @@
 
             <Switch
                 android:id="@+id/switch_restr"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/break1"
-                android:layout_marginLeft="325dp"
+                android:layout_marginLeft="280dp"
                 android:layout_marginTop="83dp"
                 android:checked="true" />
 
@@ -151,10 +151,10 @@
 
             <Switch
                 android:id="@+id/switch_widget"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/break1"
-                android:layout_marginLeft="325dp"
+                android:layout_marginLeft="280dp"
                 android:layout_marginTop="132dp"
                 android:checked="true" />
 
