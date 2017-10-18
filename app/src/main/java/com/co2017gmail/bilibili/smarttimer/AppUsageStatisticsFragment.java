@@ -1,5 +1,6 @@
 package com.co2017gmail.bilibili.smarttimer;
 
+import android.app.Application;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.pm.ResolveInfo;
@@ -21,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.AppOpsManager;
@@ -45,14 +47,14 @@ public class AppUsageStatisticsFragment extends Fragment {
     private static final String TAG1 = "AppUsageStatisticsFragm";
     private static final String TAG = AppUsageStatisticsFragment.class.getSimpleName();
     private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 100;
+    ApplicationDB applicationDB;
 
     //VisibleForTesting
     UsageStatsManager mUsageStatsManager;
-    UsageListAdapter mUsageListAdapter;
+    UsageListAdapterWithSwitch mUsageListAdapter;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     Button mOpenUsageSettingButton;
-    Spinner mSpinner;
 
     public static AppUsageStatisticsFragment newInstance() {
         AppUsageStatisticsFragment fragment = new AppUsageStatisticsFragment();
@@ -84,37 +86,18 @@ public class AppUsageStatisticsFragment extends Fragment {
     public void onViewCreated(View rootView, Bundle savedInstanceState) {
         super.onViewCreated(rootView, savedInstanceState);
 
-        mUsageListAdapter = new UsageListAdapter();
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_app_usage);
+        mUsageListAdapter = new UsageListAdapterWithSwitch();
+        mRecyclerView = rootView.findViewById(R.id.recyclerview_app_usage);
         mLayoutManager = mRecyclerView.getLayoutManager();
         mRecyclerView.scrollToPosition(0);
         mRecyclerView.setAdapter(mUsageListAdapter);
-        mOpenUsageSettingButton = (Button) rootView.findViewById(R.id.button_open_usage_setting);
-        mSpinner = (Spinner) rootView.findViewById(R.id.spinner_time_span);
-        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.action_list, android.R.layout.simple_spinner_dropdown_item);
-        mSpinner.setAdapter(spinnerAdapter);
-        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            String[] strings = getResources().getStringArray(R.array.action_list);
+        List<UsageStats> usageStatsList =
+                getUsageStatistics(UsageStatsManager.INTERVAL_DAILY);
+        Collections.sort(usageStatsList, new LastTimeLaunchedComparatorDesc());
 
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                StatsUsageInterval statsUsageInterval = StatsUsageInterval
-                        .getValue(strings[position]);
-                if (statsUsageInterval != null) {
-                    List<UsageStats> usageStatsList =
-                            getUsageStatistics(statsUsageInterval.mInterval);
-                    Collections.sort(usageStatsList, new LastTimeLaunchedComparatorDesc());
-                    updateAppsList(usageStatsList);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
     }
+
 
 ////////////////////////////******USER PERMISSION*****////////////////////////////
 
@@ -139,9 +122,7 @@ public class AppUsageStatisticsFragment extends Fragment {
 
         List<UsageStats> queryUsageStats = mUsageStatsManager
                 .queryUsageStats(UsageStatsManager.INTERVAL_DAILY, System.currentTimeMillis()-1000*10, //.queryUsageStats(intervalType, cal.getTimeInMillis(),
-
                         System.currentTimeMillis());
-
             if (queryUsageStats.size() == 0) {
                 Log.i(TAG, "The user may not allow the access to apps usage. ");
                 Toast.makeText(getActivity(),
@@ -156,6 +137,9 @@ public class AppUsageStatisticsFragment extends Fragment {
                     }
                 });
             }
+        updateAppsList(queryUsageStats);
+
+
         return queryUsageStats;
     }
 
@@ -167,6 +151,7 @@ public class AppUsageStatisticsFragment extends Fragment {
             customUsageStats.usageStats = usageStatsList.get(i);
             Context context= getActivity();
             String appname = getAppNameFromPackage(customUsageStats.usageStats.getPackageName(),context);
+
             if(customUsageStats.usageStats.getLastTimeUsed()>970725976000L&&appname!=null) {
                 try {
                     Drawable appIcon = getActivity().getPackageManager()
@@ -181,6 +166,8 @@ public class AppUsageStatisticsFragment extends Fragment {
                 customUsageStatsList.add(customUsageStats);
             }
         }
+        Collections.sort(customUsageStatsList, new customUsageStatsListComparator());
+
         mUsageListAdapter.setCustomUsageStatsList(customUsageStatsList);
         mUsageListAdapter.notifyDataSetChanged();
         mRecyclerView.scrollToPosition(0);
@@ -194,27 +181,10 @@ public class AppUsageStatisticsFragment extends Fragment {
         }
     }
 
-    static enum StatsUsageInterval {
-        DAILY("Daily", UsageStatsManager.INTERVAL_DAILY),
-        WEEKLY("Weekly", UsageStatsManager.INTERVAL_WEEKLY),
-        MONTHLY("Monthly", UsageStatsManager.INTERVAL_MONTHLY),
-        YEARLY("Yearly", UsageStatsManager.INTERVAL_YEARLY);
-
-        private int mInterval;
-        private String mStringRepresentation;
-
-        StatsUsageInterval(String stringRepresentation, int interval) {
-            mStringRepresentation = stringRepresentation;
-            mInterval = interval;
-        }
-
-        static StatsUsageInterval getValue(String stringRepresentation) {
-            for (StatsUsageInterval statsUsageInterval : values()) {
-                if (statsUsageInterval.mStringRepresentation.equals(stringRepresentation)) {
-                    return statsUsageInterval;
-                }
-            }
-            return null;
+    private static class customUsageStatsListComparator implements Comparator<CustomUsageStats> {
+        @Override
+        public int compare(CustomUsageStats left, CustomUsageStats right) {
+            return Long.compare(right.usageStats.getTotalTimeInForeground(), left.usageStats.getTotalTimeInForeground());
         }
     }
 
@@ -229,6 +199,25 @@ public class AppUsageStatisticsFragment extends Fragment {
             }
         }
         return null;
+    }
+
+    protected  String toUsageTime(UsageStats usageStats){
+        long TimeInforground = usageStats.getTotalTimeInForeground() ;
+        int minutes=500,seconds=500,hours=500 ;
+        minutes = (int) ((TimeInforground / (1000 * 60)) % 60);
+
+        seconds = (int) (TimeInforground / 1000) % 60;
+
+        hours = (int) ((TimeInforground / (1000 * 60 * 60)) % 24);
+        if(hours==0&&minutes==0){
+            return seconds + "s";
+        }
+        else if(hours==0){
+            return minutes + "m" + seconds + "s";
+        }
+        else {
+            return hours + "h" + minutes + "m" + seconds + "s";
+        }
     }
 
 }

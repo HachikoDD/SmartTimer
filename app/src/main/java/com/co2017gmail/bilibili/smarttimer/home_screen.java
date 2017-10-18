@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
@@ -83,29 +84,10 @@ public class home_screen extends AppCompatActivity {
 
         if(savedInstanceState == null){
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, AppUsageStatisticsFragment.newInstance())
+                    .add(R.id.container_homescreen, homescreen_list.newInstance())
                     .commit();
         }
 
-//        BottomNavigationView bottomNavigationView =(BottomNavigationView) findViewById(R.id.BottomNavigation);
-//
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId()) {
-//                    case R.id.schedule:
-//                        break;
-//                    case R.id.summary:
-//                        mTextMessage.setText(R.string.title_summary);
-//                        startActivity(new Intent(home_screen.this, calendar.class));
-//                        break;
-//                    case R.id.me:
-//                        mTextMessage.setText(R.string.title_me);
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
 
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
                 = new BottomNavigationView.OnNavigationItemSelectedListener() {

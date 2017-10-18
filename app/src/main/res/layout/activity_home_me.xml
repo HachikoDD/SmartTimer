@@ -4,6 +4,7 @@
     xmlns:design="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:focusableInTouchMode="true"
     android:layout_height="match_parent">
 
     <android.support.design.widget.BottomNavigationView
@@ -13,37 +14,38 @@
         android:layout_gravity="bottom"
         design:menu="@menu/menu_bottomnavigation" />
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="460dp"
+        android:orientation="vertical"
+        android:scrollIndicators="bottom">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="144dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="45dp"
+                android:layout_marginVertical="20dp"
+                android:layout_toEndOf="@+id/profile"
+                android:inputType="textMultiLine"
+                android:lines="2"
+                android:text="UserName" />
 
-                <EditText
-                    android:id="@+id/username"
-                    android:layout_width="144dp"
-                    android:layout_height="50dp"
-                    android:inputType="textMultiLine"
-                    android:lines="2"
-                    android:text="UserName"
-                    android:layout_marginVertical="20dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="45dp"
-                    android:layout_toEndOf="@+id/profile" />
+            <ImageView
+                android:id="@+id/profile"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/ic_profile_photo" />
 
-                <ImageView
-                    android:id="@+id/profile"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:src="@drawable/ic_profile_photo" />
-
-                <!--<Button
+            <!--<Button
                     android:id="@+id/upload"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
@@ -52,213 +54,216 @@
                     android:text="upload"
                     android:background="@android:color/white"/>-->
 
-                <EditText
-                    android:id="@+id/status"
-                    android:layout_width="144dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="75dp"
-                    android:inputType="textPersonName"
-                    android:text="Lalalalala~"
-                    android:layout_marginStart="24dp"
-                    android:layout_toEndOf="@+id/profile" />
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="144dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="75dp"
+                android:layout_toEndOf="@+id/profile"
+                android:inputType="textPersonName"
+                android:text="Lalalalala~" />
 
-                <Button
-                    android:id="@+id/imageView_edit"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="300dp"
-                    android:layout_marginTop="123dp"
-                    android:background="@drawable/ic_edit_button" />
+            <Button
+                android:id="@+id/imageView_edit"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="300dp"
+                android:layout_marginTop="123dp"
+                android:background="@drawable/ic_edit_button" />
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="120dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="335dp"
-                    android:layout_marginRight="100dp"
-                    android:layout_marginTop="130dp"
-                    android:text="Edit" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="335dp"
+                android:layout_marginRight="100dp"
+                android:layout_marginTop="130dp"
+                android:text="Edit" />
 
-                <View
-                    android:id="@+id/break1"
-                    android:layout_width="340dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginLeft="25dp"
-                    android:background="@android:color/darker_gray"
-                    android:layout_below="@+id/profile" />
+            <View
+                android:id="@+id/break1"
+                android:layout_width="340dp"
+                android:layout_height="1dp"
+                android:layout_below="@+id/profile"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="18dp"
+                android:background="@android:color/darker_gray" />
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/space" />
+            <Space
+                android:id="@+id/space"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/notifications"
-                    android:layout_width="120dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Notifications"
-                    android:layout_below="@+id/break1"/>
+            <TextView
+                android:id="@+id/notifications"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:layout_below="@+id/break1"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:text="Notifications" />
 
-                <Switch
-                    android:id="@+id/switch_notif"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="325dp"
-                    android:layout_marginTop="16dp"
-                    android:checked="true"
-                    android:layout_below="@+id/break1"/>
+            <Switch
+                android:id="@+id/switch_notif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/break1"
+                android:layout_marginLeft="325dp"
+                android:layout_marginTop="16dp"
+                android:checked="true" />
 
-                <TextView
-                    android:id="@+id/notifications_content"
-                    android:layout_width="300dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="40dp"
-                    android:text="Turn on to get notifications about schedules and exceeded usage"
-                    android:layout_below="@+id/break1"/>
+            <TextView
+                android:id="@+id/notifications_content"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_below="@+id/break1"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="40dp"
+                android:text="Turn on to get notifications about schedules and exceeded usage" />
 
-                <TextView
-                    android:id="@+id/restrictions"
-                    android:layout_width="120dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="87dp"
-                    android:text="Restrictions"
-                    android:layout_below="@+id/break1"/>
+            <TextView
+                android:id="@+id/restrictions"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:layout_below="@+id/break1"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="87dp"
+                android:text="Restrictions" />
 
-                <Switch
-                    android:id="@+id/switch_restr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="325dp"
-                    android:layout_marginTop="83dp"
-                    android:checked="true"
-                    android:layout_below="@+id/break1"/>
+            <Switch
+                android:id="@+id/switch_restr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/break1"
+                android:layout_marginLeft="325dp"
+                android:layout_marginTop="83dp"
+                android:checked="true" />
 
-                <TextView
-                    android:id="@+id/restrictions_content"
-                    android:layout_width="305dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="107dp"
-                    android:text="Turn on to limit the phone usage"
-                    android:layout_below="@+id/break1"/>
+            <TextView
+                android:id="@+id/restrictions_content"
+                android:layout_width="305dp"
+                android:layout_height="45dp"
+                android:layout_below="@+id/break1"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="107dp"
+                android:text="Turn on to limit the phone usage" />
 
-                <TextView
-                    android:id="@+id/widget"
-                    android:layout_width="120dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="138dp"
-                    android:text="Widget"
-                    android:layout_below="@+id/break1"/>
+            <TextView
+                android:id="@+id/widget"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:layout_below="@+id/break1"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="138dp"
+                android:text="Widget" />
 
-                <Switch
-                    android:id="@+id/switch_widget"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="325dp"
-                    android:layout_marginTop="132dp"
-                    android:checked="true"
-                    android:layout_below="@+id/break1"/>
+            <Switch
+                android:id="@+id/switch_widget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/break1"
+                android:layout_marginLeft="325dp"
+                android:layout_marginTop="132dp"
+                android:checked="true" />
 
-                <TextView
-                    android:id="@+id/widget_content"
-                    android:layout_width="300dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="158dp"
-                    android:text="Turn on to have a timer widget on your screen"
-                    android:layout_below="@+id/break1"/>
+            <TextView
+                android:id="@+id/widget_content"
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/break1"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="158dp"
+                android:text="Turn on to have a timer widget on your screen" />
 
-                <View
-                    android:id="@+id/break2"
-                    android:layout_width="340dp"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="25dp"
-                    android:background="@android:color/darker_gray"
-                    android:layout_below="@+id/widget" />
+            <View
+                android:id="@+id/break2"
+                android:layout_width="340dp"
+                android:layout_height="2dp"
+                android:layout_below="@+id/widget"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/darker_gray" />
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/select"
-                    android:layout_width="332dp"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="25dp"
-                    android:text="Select the apps you wish to have usage limitations"
-                    android:layout_below="@+id/break2"/>
+            <TextView
+                android:id="@+id/select"
+                android:layout_width="332dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/break2"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:text="Select the apps you wish to have usage limitations" />
 
-                <View
-                    android:id="@+id/break3"
-                    android:layout_width="340dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="25dp"
-                    android:background="@android:color/darker_gray"
-                    android:layout_below="@+id/select" />
+            <View
+                android:id="@+id/break3"
+                android:layout_width="340dp"
+                android:layout_height="1dp"
+                android:layout_below="@+id/select"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/darker_gray" />
 
-                <android.support.constraint.ConstraintLayout
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/space"
+                android:layout_toEndOf="@+id/space">
+
+            </android.support.constraint.ConstraintLayout>
+
+            <SeekBar
+                android:id="@+id/limited_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/container"
+                android:layout_alignParentStart="true" />
+
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@+id/break3"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="0dp"
+                tools:context="com.example.android.appusagestatistics.AppUsageStatisticsActivity"
+                tools:ignore="MergeRootFrame">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/space"
-                    android:layout_toEndOf="@+id/space">
-
-                </android.support.constraint.ConstraintLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/container"
-                    android:layout_height="300dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginBottom="0dp"
-                    tools:context="com.example.android.appusagestatistics.AppUsageStatisticsActivity"
-                    tools:ignore="MergeRootFrame"
-                    android:layout_below="@+id/break3">
+                    android:layout_height="309dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_medium"
+                    android:weightSum="1">
 
                     <LinearLayout
-                        android:gravity="center_vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="309dp"
-                        android:orientation="vertical"
-                        android:padding="@dimen/margin_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
                         android:weightSum="1">
-
-                        <LinearLayout android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="1">
-                            <TextView android:id="@+id/spinner_time_span"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="78" />
-                        </LinearLayout>
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recyclerview_app_usage"
-                            android:layout_width="320dp"
-                            android:layout_height="300dp"
-                            android:layout_marginLeft="@dimen/margin_small"
-                            android:layout_marginRight="@dimen/margin_small"
-                            android:layout_weight="0.25"
-                            android:drawSelectorOnTop="true"
-                            android:scrollbars="vertical" />
                     </LinearLayout>
 
-                </FrameLayout>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerview_app_usage"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="320dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:layout_marginRight="@dimen/margin_small"
+                        android:layout_weight="0.25"
+                        android:drawSelectorOnTop="true"
+                        android:scrollbars="vertical" />
 
-            </RelativeLayout>
+                </LinearLayout>
 
+            </FrameLayout>
 
+        </RelativeLayout>
 
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

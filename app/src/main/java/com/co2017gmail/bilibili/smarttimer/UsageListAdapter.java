@@ -1,5 +1,6 @@
 package com.co2017gmail.bilibili.smarttimer;
 
+        import android.app.Application;
         import android.content.Context;
         import android.content.Intent;
         import android.content.pm.ResolveInfo;
@@ -26,6 +27,7 @@ package com.co2017gmail.bilibili.smarttimer;
 public class UsageListAdapter extends RecyclerView.Adapter<UsageListAdapter.ViewHolder> {
 
     private List<CustomUsageStats> mCustomUsageStatsList = new ArrayList<>();
+    ApplicationDB applicationDB;
 
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
@@ -61,34 +63,33 @@ public class UsageListAdapter extends RecyclerView.Adapter<UsageListAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.usage_row, viewGroup, false);
+                .inflate(R.layout.usage_row_home_page, viewGroup, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+
         Context context= viewHolder.getPackageName().getContext();
-        long TimeInforground = 500 ;
-        int minutes=500,seconds=500,hours=500 ;
-        viewHolder.getPackageName().setText(getAppNameFromPackage(
-                mCustomUsageStatsList.get(position).usageStats.getPackageName(), context));
-        TimeInforground = mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground();
+        String appname = getAppNameFromPackage(
+                mCustomUsageStatsList.get(position).usageStats.getPackageName(), context);
+            long TimeInforground = 500;
+            int minutes = 500, seconds = 500, hours = 500;
+            viewHolder.getPackageName().setText(appname);
+            TimeInforground = mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground();
 
-        minutes = (int) ((TimeInforground / (1000 * 60)) % 60);
+            minutes = (int) ((TimeInforground / (1000 * 60)) % 60);
 
-        seconds = (int) (TimeInforground / 1000) % 60;
+            seconds = (int) (TimeInforground / 1000) % 60;
 
-        hours = (int) ((TimeInforground / (1000 * 60 * 60)) % 24);
-        if(hours==0&&minutes==0){
-            viewHolder.getLastTimeUsed().setText(seconds + "s");
-        }
-        else if(hours==0){
-            viewHolder.getLastTimeUsed().setText(minutes + "m" + seconds + "s");
-        }
-        else
-            viewHolder.getLastTimeUsed().setText(hours + "h" + minutes + "m" + seconds + "s");
-        viewHolder.getAppIcon().setImageDrawable(mCustomUsageStatsList.get(position).appIcon);
-
+            hours = (int) ((TimeInforground / (1000 * 60 * 60)) % 24);
+            if (hours == 0 && minutes == 0) {
+                viewHolder.getLastTimeUsed().setText(seconds + "s");
+            } else if (hours == 0) {
+                viewHolder.getLastTimeUsed().setText(minutes + "m" + seconds + "s");
+            } else
+                viewHolder.getLastTimeUsed().setText(hours + "h" + minutes + "m" + seconds + "s");
+            viewHolder.getAppIcon().setImageDrawable(mCustomUsageStatsList.get(position).appIcon);
     }
 
     @Override
