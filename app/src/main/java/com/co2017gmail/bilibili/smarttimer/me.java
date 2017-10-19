@@ -1,5 +1,6 @@
 package com.co2017gmail.bilibili.smarttimer;
 
+import android.app.Activity;
 import android.app.Application;
 import android.app.usage.UsageStats;
 import android.content.Context;
@@ -19,7 +20,8 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.os.Build;
+import android.provider.Settings;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,8 @@ import java.util.List;
  */
 
 public class me extends AppCompatActivity implements View.OnClickListener {
+    private static final int SYSTEM_ALERT_WINDOW_PERMISSION = 2084;
+
 
     private static final int RESULT_LOAD_IMAGE = 1;
     private static SeekBar seekBar;
@@ -47,7 +51,7 @@ public class me extends AppCompatActivity implements View.OnClickListener {
     ImageView profile;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_me);
         context = getApplicationContext();
@@ -57,110 +61,128 @@ public class me extends AppCompatActivity implements View.OnClickListener {
         restrictionSwitch = (Switch) findViewById(R.id.switch_restr);
         wedgetSwitch = (Switch) findViewById(R.id.switch_widget);
 
-        if(userDB.find(context,user_name)==null){
-            User user = new User();
-            user.userName = user_name;
-            user.notificationSwitch = false;
-            user.restrictionSwitch =false;
-            user.wedgetSwitch = false;
-            userDB.insert(context,user);
-            notificationSwitch.setChecked(false);
-            restrictionSwitch.setChecked(false);
-            wedgetSwitch.setChecked(false);
-        }else{
-            notificationSwitch.setChecked(UserDB.find(context,user_name).notificationSwitch);
-            restrictionSwitch.setChecked(UserDB.find(context,user_name).restrictionSwitch);
-            wedgetSwitch.setChecked(UserDB.find(context,user_name).wedgetSwitch);
+        //floating view
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
+            askPermission();
         }
-        final User user = userDB.find(context,user_name);
-        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    user.notificationSwitch = true;
-//                    Toast.makeText(me.this,"Ture",Toast.LENGTH_SHORT).show();
-                    UserDB.update(context,user);
-                }
-                else{
-                    user.notificationSwitch = false;
-//                    Toast.makeText(me.this,"False",Toast.LENGTH_SHORT).show();
-                    UserDB.update(context,user);
-                }
+            if (userDB.find(context, user_name) == null) {
+                User user = new User();
+                user.userName = user_name;
+                user.notificationSwitch = false;
+                user.restrictionSwitch = false;
+                user.wedgetSwitch = false;
+                userDB.insert(context, user);
+                notificationSwitch.setChecked(false);
+                restrictionSwitch.setChecked(false);
+                wedgetSwitch.setChecked(false);
+            } else {
+                notificationSwitch.setChecked(UserDB.find(context, user_name).notificationSwitch);
+                restrictionSwitch.setChecked(UserDB.find(context, user_name).restrictionSwitch);
+                wedgetSwitch.setChecked(UserDB.find(context, user_name).wedgetSwitch);
             }
-        });
+            final User user = userDB.find(context, user_name);
+            notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-        restrictionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    user.restrictionSwitch = true;
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        user.notificationSwitch = true;
 //                    Toast.makeText(me.this,"Ture",Toast.LENGTH_SHORT).show();
-                    UserDB.update(context,user);
-                }
-                else{
-                    user.restrictionSwitch = false;
+                        UserDB.update(context, user);
+                    } else {
+                        user.notificationSwitch = false;
 //                    Toast.makeText(me.this,"False",Toast.LENGTH_SHORT).show();
-                    UserDB.update(context,user);
+                        UserDB.update(context, user);
+                    }
                 }
-            }
-        });
+            });
 
-        wedgetSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    user.wedgetSwitch = true;
+            restrictionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        user.restrictionSwitch = true;
 //                    Toast.makeText(me.this,"Ture",Toast.LENGTH_SHORT).show();
-                    UserDB.update(context,user);
-                }
-                else{
-                    user.wedgetSwitch = false;
+                        UserDB.update(context, user);
+                    } else {
+                        user.restrictionSwitch = false;
 //                    Toast.makeText(me.this,"False",Toast.LENGTH_SHORT).show();
-                    UserDB.update(context,user);
+                        UserDB.update(context, user);
+                    }
                 }
+            });
+
+            wedgetSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        user.wedgetSwitch = true;
+
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                            startService(new Intent(getApplicationContext(), FloatingViewService.class));
+                            finish();
+                        } else if (Settings.canDrawOverlays(getApplicationContext())) {
+                            startService(new Intent(getApplicationContext(), FloatingViewService.class));
+                            finish();
+                        } else {
+                            askPermission();
+                            Toast.makeText(getApplicationContext(), "You need System Alert Window Permission to do this", Toast.LENGTH_SHORT).show();
+                        }
+
+                        UserDB.update(context, user);
+                    } else {
+                        user.wedgetSwitch = false;
+//                    Toast.makeText(me.this,"False",Toast.LENGTH_SHORT).show();
+                        UserDB.update(context, user);
+                    }
+                }
+            });
+
+
+            if (savedInstanceState == null) {
+                getFragmentManager().beginTransaction()
+                        .add(R.id.container, AppUsageStatisticsFragment.newInstance())
+                        .commit();
             }
-        });
+            seekbar();
 
 
-        if(savedInstanceState == null){
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, AppUsageStatisticsFragment.newInstance())
-                    .commit();
+            BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+                    = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.home:
+                            startActivity(new Intent(me.this, home_screen.class));
+                            break;
+                        case R.id.schedule:
+                            startActivity(new Intent(me.this, schedule.class));
+                            break;
+                        case R.id.summary:
+                            startActivity(new Intent(me.this, calendar.class));
+                            break;
+                    }
+                    return true;
+                }
+
+            };
+            BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.BottomNavigation);
+            navigation.setSelectedItemId(R.id.me);
+            navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+            profile = (ImageView) findViewById(R.id.profile);
+
+            profile.setOnClickListener(this);
+
         }
-        seekbar();
-
-
-
-        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-                = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.home:
-                        startActivity(new Intent(me.this, home_screen.class));
-                        break;
-                    case R.id.schedule:
-                        startActivity(new Intent(me.this, schedule.class));
-                        break;
-                    case R.id.summary:
-                        startActivity(new Intent(me.this, calendar.class));
-                        break;
-                }
-                return true;
-            }
-
-        };
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.BottomNavigation);
-        navigation.setSelectedItemId(R.id.me);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        profile = (ImageView) findViewById(R.id.profile);
-
-        profile.setOnClickListener(this);
-
+    //floating view
+    private void askPermission() {
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:" + getPackageName()));
+        startActivityForResult(intent, SYSTEM_ALERT_WINDOW_PERMISSION);
     }
 
     @Override
