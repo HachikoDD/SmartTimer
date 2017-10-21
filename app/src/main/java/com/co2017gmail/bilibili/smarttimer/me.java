@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.provider.MediaStore;
@@ -51,10 +52,10 @@ public class me extends AppCompatActivity implements View.OnClickListener {
     private static Switch restrictionSwitch;
     private static Switch wedgetSwitch;
     private static Context context;
-
     private static TextView textView;
     UserDB userDB;
     ImageView profile;
+    Button edit;
 
     public Handler handler_back;
     public Runnable runnable_back;
@@ -80,6 +81,7 @@ public class me extends AppCompatActivity implements View.OnClickListener {
         notificationSwitch = (Switch) findViewById((R.id.switch_notif));
         restrictionSwitch = (Switch) findViewById(R.id.switch_restr);
         wedgetSwitch = (Switch) findViewById(R.id.switch_widget);
+        edit = (Button) findViewById(R.id.imageView_edit);
 
         if(userDB.find(context,user_name)==null){
             User user = new User();
@@ -144,6 +146,14 @@ public class me extends AppCompatActivity implements View.OnClickListener {
 //                    Toast.makeText(me.this,"False",Toast.LENGTH_SHORT).show();
                     UserDB.update(context,user);
                 }
+            }
+        });
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handler_back.removeCallbacks(runnable_back);
+                startActivity(new Intent(me.this, EditActivity.class));
             }
         });
 
@@ -327,9 +337,9 @@ public class me extends AppCompatActivity implements View.OnClickListener {
                         }
                     }
                     String app_name_top = getAppNameFromPackage(getTopAppName(getApplicationContext()), getApplicationContext());
+                    user_set_limiation = userDB.find(getApplicationContext(), "BiliBili").dailyUsageLimit * 60;
                     Usage today_uasge = usageDB.find(getApplicationContext(), dateTime);
                     if(CheckisPeriod(working_time_list)) {
-                        user_set_limiation = userDB.find(getApplicationContext(), "BiliBili").dailyUsageLimit * 60;
                         if (disturbing_app_list.contains(app_name_top)) {
                             String min = toUsageTime_Min(today_uasge.totalUsage, user_set_limiation).toString() + "m";
                             String sceond = toUsageTime_Sceond(today_uasge.totalUsage, user_set_limiation).toString() + "s";
@@ -338,11 +348,10 @@ public class me extends AppCompatActivity implements View.OnClickListener {
                             Log.i("Back_ground_RUNING", app_name_top);
                             Log.i("Back_ground_Lefttime", min + sceond);
                         }
-                        handler_back.postDelayed(this, delay);
                     }
                     else{
                         Log.i("Back_ground_RUNING_NO", app_name_top);
-                        if (disturbing_app_list.contains(app_name_top)) {
+                        if (disturbing_app_list.contains(app_name_top)&&today_uasge!=null) {
                             String min = toUsageTime_Min(today_uasge.totalUsage, user_set_limiation).toString() + "m";
                             String sceond = toUsageTime_Sceond(today_uasge.totalUsage, user_set_limiation).toString() + "s";
                             today_uasge.totalUsage = today_uasge.totalUsage - 1000;
@@ -351,6 +360,7 @@ public class me extends AppCompatActivity implements View.OnClickListener {
                             Log.i("Back_ground_Lefttime_NO", min + sceond);
                         }
                     }
+                    handler_back.postDelayed(this, delay);
                 }
             }, delay);
 

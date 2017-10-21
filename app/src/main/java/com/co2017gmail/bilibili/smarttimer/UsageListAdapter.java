@@ -1,9 +1,13 @@
 package com.co2017gmail.bilibili.smarttimer;
 
+        import android.app.ActivityManager;
         import android.app.Application;
+        import android.app.usage.UsageStats;
+        import android.app.usage.UsageStatsManager;
         import android.content.Context;
         import android.content.Intent;
         import android.content.pm.ResolveInfo;
+        import android.os.Build;
         import android.support.v7.widget.RecyclerView;
         import android.util.Log;
         import android.view.LayoutInflater;
@@ -110,13 +114,13 @@ public class UsageListAdapter extends RecyclerView.Adapter<UsageListAdapter.View
         Context context= viewHolder.getPackageName().getContext();
         String appname = getAppNameFromPackage(mCustomUsageStatsList.get(position).usageStats.getPackageName(), context);
         viewHolder.getPackageName().setText(appname);
-        App app = applicationDB.find(context,appname);
-        app.usage = mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground();
-        applicationDB.update(context, app);
-
-        usage.totalUsage = usage.totalUsage + mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground();
-        usageDB.update(context, usage);
-
+        if(appname == getAppNameFromPackage(getTopAppName(context),context)) {
+            App app = applicationDB.find(context, appname);
+            app.usage = mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground();
+            applicationDB.update(context, app);
+            usage.totalUsage = usage.totalUsage + mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground()/2;
+            usageDB.update(context, usage);
+        }
         viewHolder.getLastTimeUsed().setText(toUsageTime(mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground()));
         viewHolder.getAppIcon().setImageDrawable(mCustomUsageStatsList.get(position).appIcon);
     }
@@ -188,6 +192,50 @@ public class UsageListAdapter extends RecyclerView.Adapter<UsageListAdapter.View
             return true;
         }
         return false;
+    }
+
+    public static String getTopAppName(Context context) {
+        ActivityManager mActivityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        String strName = "";
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                strName = getLollipopFGAppPackageName(context);
+            } else {
+                strName = mActivityManager.getRunningTasks(1).get(0).topActivity.getClassName();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return strName;
+    }
+
+    private static String getLollipopFGAppPackageName(Context ctx) {
+
+        try {
+            UsageStatsManager usageStatsManager = (UsageStatsManager) ctx.getSystemService(Context.USAGE_STATS_SERVICE);
+            long milliSecs = 24 * 60 * 60 * 1000;
+            Date date = new Date();
+            List<UsageStats> queryUsageStats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, date.getTime() - milliSecs, date.getTime());
+            if (queryUsageStats.size() > 0) {
+                Log.i("LPU", "queryUsageStats size: " + queryUsageStats.size());
+            }
+            long recentTime = 0;
+            String recentPkg = "";
+            for (int i = 0; i < queryUsageStats.size(); i++) {
+                UsageStats stats = queryUsageStats.get(i);
+                if (i == 0 && !"org.pervacio.pvadiag".equals(stats.getPackageName())) {
+                    Log.i("LPU", "PackageName: " + stats.getPackageName() + " " + stats.getLastTimeStamp());
+                }
+                if (stats.getLastTimeStamp() > recentTime) {
+                    recentTime = stats.getLastTimeStamp();
+                    recentPkg = stats.getPackageName();
+                }
+            }
+            return recentPkg;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 }

@@ -39,6 +39,8 @@
         <activity android:name=".calendar"></activity>
         <activity android:name=".me"></activity>
         <activity android:name=".detail_summary"></activity>
+        <activity android:name=".EditActivity"></activity>
+
     </application>
 
 </manifest>

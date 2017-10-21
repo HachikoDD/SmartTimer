@@ -46,6 +46,7 @@ public class home_screen extends AppCompatActivity{
     String dateTime = df2.format(new Date());
     ArrayList<working_time> working_time_list = new ArrayList<>();
     ArrayList<String> disturbing_app_list = new ArrayList<>();
+    String not_working_time;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -201,8 +202,14 @@ public class home_screen extends AppCompatActivity{
                     UsageDB.update(getApplicationContext(),usage);
                     percentage.setText(per/user_set_limiation*100+"%");
                     percentage.setTextColor(getTextColor((int)(per/user_set_limiation*100)));
-                    min_left.setText(toUsageTime_Min(usageDB.find(getApplicationContext(), dateTime).totalUsage,user_set_limiation).toString()+"m");
-                    second_left.setText(toUsageTime_Sceond(usageDB.find(getApplicationContext(), dateTime).totalUsage,user_set_limiation).toString()+"s");
+                    if(CheckisPeriod(working_time_list)) {
+                        min_left.setText(toUsageTime_Min(usageDB.find(getApplicationContext(), dateTime).totalUsage, user_set_limiation).toString() + "m");
+                        second_left.setText(toUsageTime_Sceond(usageDB.find(getApplicationContext(), dateTime).totalUsage, user_set_limiation).toString() + "s");
+                    }else{
+                        min_left.setText(toUsageTime_Min(usageDB.find(getApplicationContext(), dateTime).totalUsage, user_set_limiation).toString() + "m");
+                        second_left.setText(toUsageTime_Sceond(usageDB.find(getApplicationContext(), dateTime).totalUsage, user_set_limiation).toString() + "s");
+                        handler.removeCallbacks(runnable);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -223,9 +230,9 @@ public class home_screen extends AppCompatActivity{
                         }
                     }
                     String app_name_top = getAppNameFromPackage(getTopAppName(getApplicationContext()), getApplicationContext());
-                    Usage today_uasge = usageDB.find(getApplicationContext(), dateTime);
+                    user_set_limiation = userDB.find(getApplicationContext(), "BiliBili").dailyUsageLimit * 60;
                     if(CheckisPeriod(working_time_list)) {
-                        user_set_limiation = userDB.find(getApplicationContext(), "BiliBili").dailyUsageLimit * 60;
+                        Usage today_uasge = usageDB.find(getApplicationContext(), dateTime);
                         if (disturbing_app_list.contains(app_name_top)) {
                             String min = toUsageTime_Min(today_uasge.totalUsage, user_set_limiation).toString() + "m";
                             String sceond = toUsageTime_Sceond(today_uasge.totalUsage, user_set_limiation).toString() + "s";
@@ -234,14 +241,19 @@ public class home_screen extends AppCompatActivity{
                             Log.i("Back_ground_RUNING", app_name_top);
                             Log.i("Back_ground_Lefttime", min + sceond);
                         }
-                        handler_back.postDelayed(this, delay);
                     }
                     else{
-                        if (disturbing_app_list.contains(app_name_top)) {
+                        Usage today_uasge = usageDB.find(getApplicationContext(), dateTime);
+                        if (disturbing_app_list.contains(app_name_top)&&today_uasge!=null) {
+                            String min = toUsageTime_Min(today_uasge.totalUsage, user_set_limiation).toString() + "m";
+                            String sceond = toUsageTime_Sceond(today_uasge.totalUsage, user_set_limiation).toString() + "s";
                             today_uasge.totalUsage = today_uasge.totalUsage - 1000;
                             usageDB.update(getApplicationContext(), today_uasge);
+                            Log.i("Back_ground_RUNING", app_name_top);
+                            Log.i("Back_ground_Lefttime", min + sceond);
                         }
                     }
+                    handler_back.postDelayed(this, delay);
                 }
             }, delay);
 
