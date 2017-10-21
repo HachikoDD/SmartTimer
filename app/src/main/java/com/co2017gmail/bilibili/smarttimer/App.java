@@ -8,6 +8,6 @@ import android.widget.ImageView;
 
 public class App {
     public String name;
-    public String usage;
+    public Long usage;
     public boolean monitorSwitch;
 }

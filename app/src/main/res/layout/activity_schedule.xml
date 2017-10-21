@@ -42,7 +42,7 @@
                 android:layout_toRightOf = "@id/title_shedule"
                 />
 
-            <CheckBox
+            <android.support.v7.widget.AppCompatCheckBox
                 android:id="@+id/checkbox_task1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:buttonTint="@color/blue"
                 android:layout_below="@id/add_button"
                 />
-            <CheckBox
+            <android.support.v7.widget.AppCompatCheckBox
                 android:id="@+id/checkbox_task2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,12 +74,12 @@
                 android:layout_below="@id/checkbox_task2"
                 />
 
-            <CheckBox
+            <android.support.v7.widget.AppCompatCheckBox
                 android:id="@+id/checkbox_task3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingRight="5dp"
-                android:text="@string/task2"
+                android:text="@string/task3"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
                 android:onClick="onCheckboxClicked"
@@ -87,7 +87,7 @@
                 />
 
 
-            <CheckBox
+            <android.support.v7.widget.AppCompatCheckBox
                 android:id="@+id/checkbox_task4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
                 android:onClick="onCheckboxClicked"
                 android:paddingRight="5dp"
-                android:text="@string/task2"
+                android:text="@string/task4"
                 android:layout_below="@id/checkbox_task3"
                 />
 

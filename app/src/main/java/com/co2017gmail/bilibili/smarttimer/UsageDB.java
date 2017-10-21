@@ -30,8 +30,8 @@ public class UsageDB {
             while(c.moveToNext()){
                 usage = new Usage();
                 usage.dateTime = c.getString(c.getColumnIndex(SqliteDBField.Usage.DATETIME));
-                usage.totalUsage = c.getString(c.getColumnIndex(SqliteDBField.Usage.TOTALUSAGE));
-                usage.wastedTime = c.getString(c.getColumnIndex(SqliteDBField.Usage.WASTEDTIME));
+                usage.totalUsage = c.getLong(c.getColumnIndex(SqliteDBField.Usage.TOTALUSAGE));
+                usage.wastedTime = c.getLong(c.getColumnIndex(SqliteDBField.Usage.WASTEDTIME));
                 usage.score = c.getInt(c.getColumnIndex(SqliteDBField.Usage.SCORE));
                 usages.add(usage);
             }
@@ -105,8 +105,8 @@ public class UsageDB {
             if(c.moveToFirst()){//determine wether the cursor is null
                 usage = new Usage();
                 usage.dateTime = c.getString(c.getColumnIndex(SqliteDBField.Usage.DATETIME));
-                usage.totalUsage = c.getString(c.getColumnIndex(SqliteDBField.Usage.TOTALUSAGE));
-                usage.wastedTime = c.getString(c.getColumnIndex(SqliteDBField.Usage.WASTEDTIME));
+                usage.totalUsage = c.getLong(c.getColumnIndex(SqliteDBField.Usage.TOTALUSAGE));
+                usage.wastedTime = c.getLong(c.getColumnIndex(SqliteDBField.Usage.WASTEDTIME));
                 usage.score = c.getInt(c.getColumnIndex(SqliteDBField.Usage.SCORE));
             }
             c.close();

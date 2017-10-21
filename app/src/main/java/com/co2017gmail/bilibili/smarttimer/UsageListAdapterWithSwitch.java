@@ -104,7 +104,6 @@ public class UsageListAdapterWithSwitch extends RecyclerView.Adapter<UsageListAd
         }
         final  App app = new App();
         app.name = getAppNameFromPackage(mCustomUsageStatsList.get(position).usageStats.getPackageName(), context);
-        app.usage =Useage;
 
         if(ApplicationDB.find(context,app.name)!=null){
             viewHolder.getDisturb().setChecked(ApplicationDB.find(context,app.name).monitorSwitch);
@@ -117,13 +116,15 @@ public class UsageListAdapterWithSwitch extends RecyclerView.Adapter<UsageListAd
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b==true) {
-                    app.monitorSwitch = true;
-                    ApplicationDB.update(context, app);
+                    App temp = ApplicationDB.find(context,app.name);
+                    temp.monitorSwitch= true;
+                    ApplicationDB.update(context, temp);
                     Toast.makeText(context, "Disturb"+app.name, Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    app.monitorSwitch = false;
-                    ApplicationDB.update(context, app);
+                    App temp = ApplicationDB.find(context,app.name);
+                    temp.monitorSwitch= false;
+                    ApplicationDB.update(context, temp);
                     Toast.makeText(context, "Not Disturb"+app.name, Toast.LENGTH_SHORT).show();
                 }
             }

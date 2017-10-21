@@ -18,12 +18,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +40,12 @@ public class homescreen_list extends Fragment {
     private static final String TAG = homescreen_list.class.getSimpleName();
     private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 100;
     ApplicationDB applicationDB;
+    UsageDB usageDB;
+    UserDB userDB;
+
+
+
+
 
     //VisibleForTesting
     UsageStatsManager mUsageStatsManager;
@@ -43,7 +53,6 @@ public class homescreen_list extends Fragment {
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     Button mOpenUsageSettingButton;
-    Spinner mSpinner;
 
     public static homescreen_list newInstance() {
         homescreen_list fragment = new homescreen_list();
@@ -61,7 +70,6 @@ public class homescreen_list extends Fragment {
         //noinspection ResourceType
         mUsageStatsManager = (UsageStatsManager) getActivity()
                 .getSystemService("usagestats"); //Context.USAGE_STATS_SERVICE
-
     }
 
     @Override
@@ -74,7 +82,6 @@ public class homescreen_list extends Fragment {
     @Override
     public void onViewCreated(View rootView, Bundle savedInstanceState) {
         super.onViewCreated(rootView, savedInstanceState);
-
         mUsageListAdapter = new UsageListAdapter();
         mRecyclerView = rootView.findViewById(R.id.recyclerview_app_usage);
         mLayoutManager = mRecyclerView.getLayoutManager();
@@ -84,7 +91,6 @@ public class homescreen_list extends Fragment {
         List<UsageStats> usageStatsList =
                 getUsageStatistics(UsageStatsManager.INTERVAL_DAILY);
         Collections.sort(usageStatsList, new homescreen_list.LastTimeLaunchedComparatorDesc());
-
     }
 
 
@@ -134,6 +140,19 @@ public class homescreen_list extends Fragment {
 
     void updateAppsList(List<UsageStats> usageStatsList) {
         List<CustomUsageStats> customUsageStatsList = new ArrayList<>();
+        SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yy");
+        String dateTime = df2.format(new Date());
+        Usage usage;
+        if(usageDB.find(getContext(),dateTime)==null){
+            usage = new Usage();
+            usage.dateTime = dateTime;
+            usage.totalUsage = 0L;
+            usageDB.insert(getContext(),usage);
+        }else {
+            usage = usageDB.find(getContext(), dateTime);
+            usage.totalUsage = 0L;
+            usageDB.update(getContext(), usage);
+        }
 
         for (int i = 0; i < usageStatsList.size(); i++) {
             CustomUsageStats customUsageStats = new CustomUsageStats();
@@ -151,16 +170,17 @@ public class homescreen_list extends Fragment {
                         customUsageStats.appIcon = getActivity()
                                 .getDrawable(R.drawable.ic_default_app_launcher);
                     }
-                    if(applicationDB.find(context,appname)!=null)
-                    if(applicationDB.find(context,appname).monitorSwitch) {
+                    if(applicationDB.find(context,appname).monitorSwitch&&applicationDB.find(context,appname)!=null) {
                         customUsageStatsList.add(customUsageStats);
-                    }
+                 }
             }
+
         }
         Collections.sort(customUsageStatsList, new homescreen_list.customUsageStatsListComparator());
         mUsageListAdapter.setCustomUsageStatsList(customUsageStatsList);
         mUsageListAdapter.notifyDataSetChanged();
         mRecyclerView.scrollToPosition(0);
+
     }
 
     private static class LastTimeLaunchedComparatorDesc implements Comparator<UsageStats> {
@@ -191,21 +211,20 @@ public class homescreen_list extends Fragment {
         return null;
     }
 
-    protected  String toUsageTime(UsageStats usageStats){
-        long TimeInforground = usageStats.getTotalTimeInForeground() ;
-        int minutes=500,seconds=500,hours=500 ;
+    protected  String toUsageTime(Long time) {
+        long TimeInforground = 500+time;
+        int minutes = 500, seconds = 500, hours = 500;
         minutes = (int) ((TimeInforground / (1000 * 60)) % 60);
-
         seconds = (int) (TimeInforground / 1000) % 60;
-
         hours = (int) ((TimeInforground / (1000 * 60 * 60)) % 24);
-        if(hours==0&&minutes==0){
+        if (hours == 0 && minutes == 0) {
             return seconds + "s";
-        }
-        else if(hours==0){
+        } else if (hours == 0) {
             return minutes + "m" + seconds + "s";
-        }
-        else {
+        } else
             return hours + "h" + minutes + "m" + seconds + "s";
-        }
-}}
+    }
+
+
+
+}

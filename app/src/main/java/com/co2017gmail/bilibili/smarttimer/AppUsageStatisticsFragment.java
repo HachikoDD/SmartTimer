@@ -47,7 +47,6 @@ public class AppUsageStatisticsFragment extends Fragment {
     private static final String TAG1 = "AppUsageStatisticsFragm";
     private static final String TAG = AppUsageStatisticsFragment.class.getSimpleName();
     private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 100;
-    ApplicationDB applicationDB;
 
     //VisibleForTesting
     UsageStatsManager mUsageStatsManager;

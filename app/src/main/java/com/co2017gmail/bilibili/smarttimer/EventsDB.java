@@ -86,7 +86,7 @@ public class EventsDB {
             cv.put(SqliteDBField.Events.EVENTFINISHTIME,events.eventFinishTime);
             cv.put(SqliteDBField.Events.EVENTSTARTTIME,events.eventStartTime);
             cv.put(SqliteDBField.Events.EVENTSTATUSTIME,events.eventStatusTime);
-            int result = db.update(SqliteDBField.Events.TABLE, cv, SqliteDBField.Usage.DATETIME+"=?",new String[]{events.eventName});
+            int result = db.update(SqliteDBField.Events.TABLE, cv, SqliteDBField.Events.EVENTNAME+"=?",new String[]{events.eventName});
             return result;
 
         }catch (IOException e) {
@@ -103,6 +103,29 @@ public class EventsDB {
         try {
             db = getDataBase(context);
             Cursor c = db.rawQuery("select * from "+SqliteDBField.Events.TABLE+" where "+SqliteDBField.Events.EVENTNAME+"=?",new String[]{eventName});
+            if(c.moveToFirst()){//determine wether the cursor is null
+                event = new Events();
+                event.eventName = c.getString(c.getColumnIndex(SqliteDBField.Events.EVENTNAME));
+                event.eventFinishTime = c.getString(c.getColumnIndex(SqliteDBField.Events.EVENTFINISHTIME));
+                event.eventStartTime = c.getString(c.getColumnIndex(SqliteDBField.Events.EVENTSTARTTIME));
+                event.eventStatusTime = c.getString(c.getColumnIndex(SqliteDBField.Events.EVENTSTATUSTIME));
+            }
+            c.close();
+            db.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            System.err.println(e);
+        }
+        return event;
+    }
+    public static Events find_bydate(Context context,String date) {
+        // TODO Auto-generated method stub
+        SQLiteDatabase db = null;
+        Events event =null;
+        try {
+            db = getDataBase(context);
+            Cursor c = db.rawQuery("select * from "+SqliteDBField.Events.TABLE+" where "+SqliteDBField.Events.EVENTSTATUSTIME+"=?",new String[]{date});
             if(c.moveToFirst()){//determine wether the cursor is null
                 event = new Events();
                 event.eventName = c.getString(c.getColumnIndex(SqliteDBField.Events.EVENTNAME));

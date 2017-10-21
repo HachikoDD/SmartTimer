@@ -7,7 +7,7 @@ package com.co2017gmail.bilibili.smarttimer;
 public class Usage {
     public  String usage;
     public  String dateTime;
-    public  String totalUsage;
-    public  String wastedTime;
+    public  Long totalUsage;
+    public  Long wastedTime;
     public  int score;
 }

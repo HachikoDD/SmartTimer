@@ -12,7 +12,6 @@ public class SqliteDBField {
         public static String APPNAME = "appname";
         public static String APPUSAGE = "appUsage";
         public static String APPMONITORSWITCH = "appMonitorSwitch";
-        public static ImageView APPICON;
     }
    public static class User{
         public static String TABLE = "user";

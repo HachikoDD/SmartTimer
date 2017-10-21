@@ -32,7 +32,7 @@ public class ApplicationDB {
             while(c.moveToNext()){
                 app = new App();
                 app.name = c.getString(c.getColumnIndex(SqliteDBField.App.APPNAME));
-                app.usage = c.getString(c.getColumnIndex(SqliteDBField.App.APPUSAGE));
+                app.usage = c.getLong(c.getColumnIndex(SqliteDBField.App.APPUSAGE));
                 app.monitorSwitch = c.getInt(c.getColumnIndex(SqliteDBField.App.APPMONITORSWITCH))==1;
                 apps.add(app);
             }
@@ -104,7 +104,7 @@ public class ApplicationDB {
             if(c.moveToFirst()){//determine wether the cursor is null
                 app = new App();
                 app.name = c.getString(c.getColumnIndex(SqliteDBField.App.APPNAME));
-                app.usage = c.getString(c.getColumnIndex(SqliteDBField.App.APPUSAGE));
+                app.usage = c.getLong(c.getColumnIndex(SqliteDBField.App.APPUSAGE));
                 app.monitorSwitch = c.getInt(c.getColumnIndex(SqliteDBField.App.APPMONITORSWITCH))==1;
             }
             c.close();
