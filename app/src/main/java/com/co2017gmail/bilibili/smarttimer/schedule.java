@@ -53,6 +53,8 @@ public class schedule extends AppCompatActivity {
     String nowTime = df3.format(new Date());
     ArrayList<working_time> working_time_list = new ArrayList<>();
     ArrayList<String> disturbing_app_list = new ArrayList<>();
+    ArrayList<Events> events_today = new ArrayList<>();
+    ArrayList<Events> events_today_filter = new ArrayList<>();
 
 
     @Override
@@ -87,15 +89,13 @@ public class schedule extends AppCompatActivity {
             checkBox4.setChecked(false);
         }
 
-        ArrayList<Events> events_today = new ArrayList<>();
-        ArrayList<Events> events_today_filter = new ArrayList<>();
         working_time_list = new ArrayList<>();
         Context context = getApplicationContext();
         if(eventsDB.findAll(getApplicationContext())!=null)
             events_today = (ArrayList<Events>) eventsDB.findAll(getApplicationContext());
 
         for(Events events: events_today){
-
+            working_time_list = new ArrayList<>();
             if(events.eventStatusTime.equals("ON")) {
                 events_today_filter.add(events);
                 Log.i("Event_NAME:", events.eventName);
@@ -103,7 +103,7 @@ public class schedule extends AppCompatActivity {
                 try {
                     Date date_start = df3.parse(events.eventStartTime);
                     Date date_end = df3.parse(events.eventFinishTime);
-                    working_time_list.add(new working_time(date_start,date_end));
+                    working_time_list.add(new working_time(date_start,date_end,events.eventName));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -224,14 +224,14 @@ public class schedule extends AppCompatActivity {
             Events events = new Events();
             events.eventStatusTime="OFF";
             events.eventName=name;
-            events.eventStartTime = "19/10/17/08/47";
+            events.eventStartTime = "19/10/17/01/47";
             events.eventFinishTime = "19/10/17/09/47";
             eventsDB.insert(getApplicationContext(),events);
         }
         else{
             Events events = eventsDB.find(getApplicationContext(),name);
-            events.eventStartTime = "21/10/17/08/00";
-            events.eventFinishTime = "21/10/17/10/00";
+            events.eventStartTime = "22/10/17/00/00";
+            events.eventFinishTime = "22/10/17/10/00";
             eventsDB.update(getApplicationContext(),events);
         }
     }
@@ -247,8 +247,8 @@ public class schedule extends AppCompatActivity {
         }
         else{
             Events events = eventsDB.find(getApplicationContext(),name);
-            events.eventStartTime = "21/10/17/13/01";
-            events.eventFinishTime = "21/10/17/15/00";
+            events.eventStartTime = "22/10/17/13/01";
+            events.eventFinishTime = "22/10/17/15/00";
             eventsDB.update(getApplicationContext(),events);
         }
     }
@@ -264,8 +264,8 @@ public class schedule extends AppCompatActivity {
         }
         else{
             Events events = eventsDB.find(getApplicationContext(),name);
-            events.eventStartTime = "21/10/17/15/00";
-            events.eventFinishTime = "21/10/17/17/00";
+            events.eventStartTime = "22/10/17/15/00";
+            events.eventFinishTime = "22/10/17/17/00";
             eventsDB.update(getApplicationContext(),events);
         }
     }
@@ -281,8 +281,8 @@ public class schedule extends AppCompatActivity {
         }
         else{
             Events events = eventsDB.find(getApplicationContext(),name);
-            events.eventStartTime = "21/10/17/20/00";
-            events.eventFinishTime = "21/10/17/23/00";
+            events.eventStartTime = "22/10/17/20/00";
+            events.eventFinishTime = "22/10/17/23/00";
             eventsDB.update(getApplicationContext(),events);
         }
     }
@@ -290,10 +290,12 @@ public class schedule extends AppCompatActivity {
     public class working_time{
         private Date start;
         private Date end;
+        private String Lable;
 
-        private working_time(Date start, Date end){
+        private working_time(Date start, Date end,String lable){
             this.start = start;
             this.end = end;
+            this.Lable = lable;
         }
 
         private Date get_from(){
@@ -302,6 +304,10 @@ public class schedule extends AppCompatActivity {
 
         private Date get_end(){
             return end;
+        }
+
+        private String getLable(){
+            return Lable;
         }
     }
 

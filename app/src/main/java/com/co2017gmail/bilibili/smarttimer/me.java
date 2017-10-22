@@ -10,6 +10,7 @@ import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -56,7 +57,7 @@ public class me extends AppCompatActivity implements View.OnClickListener {
     UserDB userDB;
     ImageView profile;
     Button edit;
-
+    private static final int SYSTEM_ALERT_WINDOW_PERMISSION = 2084;
     public Handler handler_back;
     public Runnable runnable_back;
     ApplicationDB applicationDB;
@@ -73,6 +74,7 @@ public class me extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_me);
         context = getApplicationContext();
@@ -82,6 +84,10 @@ public class me extends AppCompatActivity implements View.OnClickListener {
         restrictionSwitch = (Switch) findViewById(R.id.switch_restr);
         wedgetSwitch = (Switch) findViewById(R.id.switch_widget);
         edit = (Button) findViewById(R.id.imageView_edit);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
+            askPermission();
+        }
 
         if(userDB.find(context,user_name)==null){
             User user = new User();
@@ -139,6 +145,16 @@ public class me extends AppCompatActivity implements View.OnClickListener {
                 if(b){
                     user.wedgetSwitch = true;
 //                    Toast.makeText(me.this,"Ture",Toast.LENGTH_SHORT).show();
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                        startService(new Intent(getApplicationContext(), FloatingViewService.class));
+                        finish();
+                    } else if (Settings.canDrawOverlays(getApplicationContext())) {
+                        startService(new Intent(getApplicationContext(), FloatingViewService.class));
+                        finish();
+                    } else {
+                        askPermission();
+                        Toast.makeText(getApplicationContext(), "You need System Alert Window Permission to do this", Toast.LENGTH_SHORT).show();
+                    }
                     UserDB.update(context,user);
                 }
                 else{
@@ -173,7 +189,7 @@ public class me extends AppCompatActivity implements View.OnClickListener {
             events_today = (ArrayList<Events>) eventsDB.findAll(getApplicationContext());
 
         for(Events events: events_today){
-
+            working_time_list = new ArrayList<>();
             if(events.eventStatusTime.equals("ON")) {
                 events_today_filter.add(events);
                 Log.i("Event_NAME:", events.eventName);
@@ -452,4 +468,9 @@ public class me extends AppCompatActivity implements View.OnClickListener {
         return  minutes*60+hours*3600+seconds;
     }
 
+    private void askPermission() {
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:" + getPackageName()));
+        startActivityForResult(intent, SYSTEM_ALERT_WINDOW_PERMISSION);
+    }
 }

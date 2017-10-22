@@ -46,7 +46,6 @@ public class home_screen extends AppCompatActivity{
     String dateTime = df2.format(new Date());
     ArrayList<working_time> working_time_list = new ArrayList<>();
     ArrayList<String> disturbing_app_list = new ArrayList<>();
-    String not_working_time;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -60,7 +59,10 @@ public class home_screen extends AppCompatActivity{
         Context context = getApplicationContext();
         if(eventsDB.findAll(getApplicationContext())!=null)
             events_today = (ArrayList<Events>) eventsDB.findAll(getApplicationContext());
+        user_set_limiation = userDB.find(getApplicationContext(),"BiliBili").dailyUsageLimit * 60;
 
+//        min_left.setText(toUsageTime_Min(usageDB.find(getApplicationContext(), dateTime).totalUsage, user_set_limiation).toString() + "m");
+//        second_left.setText(toUsageTime_Sceond(usageDB.find(getApplicationContext(), dateTime).totalUsage, user_set_limiation).toString() + "s");
 
 
 //        Usage usage = new Usage();
@@ -84,11 +86,12 @@ public class home_screen extends AppCompatActivity{
 
 
         for(Events events: events_today){
-
+            working_time_list = new ArrayList<>();
             if(events.eventStatusTime.equals("ON")) {
                 events_today_filter.add(events);
-//                Log.i("Event_NAME:", events.eventName);
-//                Log.i("Event_TIME:", events.eventStartTime + " TO " + events.eventFinishTime);
+                Log.i("Event_NAME:", events.eventName);
+                Log.i("Event_Now:", df3.format(new Date()));
+                Log.i("Event_TIME:", events.eventStartTime + " TO " + events.eventFinishTime);
                 try {
                     Date date_start = df3.parse(events.eventStartTime);
                     Date date_end = df3.parse(events.eventFinishTime);
@@ -103,7 +106,7 @@ public class home_screen extends AppCompatActivity{
 //            Log.i("Event_TIME:", working_time.get_from() + " TO " + working_time.get_end());
 //        }
 
-        user_set_limiation = userDB.find(getApplicationContext(),"BiliBili").dailyUsageLimit * 60;
+
         if(savedInstanceState == null){
             getFragmentManager().beginTransaction()
                     .add(R.id.container_homescreen, homescreen_list.newInstance())
@@ -231,26 +234,25 @@ public class home_screen extends AppCompatActivity{
                     }
                     String app_name_top = getAppNameFromPackage(getTopAppName(getApplicationContext()), getApplicationContext());
                     user_set_limiation = userDB.find(getApplicationContext(), "BiliBili").dailyUsageLimit * 60;
+                    Usage today_uasge = usageDB.find(getApplicationContext(), dateTime);
                     if(CheckisPeriod(working_time_list)) {
-                        Usage today_uasge = usageDB.find(getApplicationContext(), dateTime);
                         if (disturbing_app_list.contains(app_name_top)) {
                             String min = toUsageTime_Min(today_uasge.totalUsage, user_set_limiation).toString() + "m";
                             String sceond = toUsageTime_Sceond(today_uasge.totalUsage, user_set_limiation).toString() + "s";
                             today_uasge.totalUsage = today_uasge.totalUsage + 1000;
                             usageDB.update(getApplicationContext(), today_uasge);
                             Log.i("Back_ground_RUNING", app_name_top);
-                            Log.i("Back_ground_Lefttime", min + sceond);
+                            Log.i("Back_ground_RUNING", min + sceond);
                         }
                     }
                     else{
-                        Usage today_uasge = usageDB.find(getApplicationContext(), dateTime);
                         if (disturbing_app_list.contains(app_name_top)&&today_uasge!=null) {
                             String min = toUsageTime_Min(today_uasge.totalUsage, user_set_limiation).toString() + "m";
                             String sceond = toUsageTime_Sceond(today_uasge.totalUsage, user_set_limiation).toString() + "s";
                             today_uasge.totalUsage = today_uasge.totalUsage - 1000;
                             usageDB.update(getApplicationContext(), today_uasge);
-                            Log.i("Back_ground_RUNING", app_name_top);
-                            Log.i("Back_ground_Lefttime", min + sceond);
+                            Log.i("Back_ground_RUNING_NO", app_name_top);
+                            Log.i("Back_ground_Lefttime_NO", min + sceond);
                         }
                     }
                     handler_back.postDelayed(this, delay);
@@ -262,10 +264,10 @@ public class home_screen extends AppCompatActivity{
 
     private  int getTextColor(int progress){
         int result;
-        if(0<= progress && progress <20){
+        if(0<= progress && progress <30){
             result = getResources().getColor(R.color.red);
         }
-        else if(20<= progress && progress <40){
+        else if(30<= progress && progress <80){
             result = getResources().getColor(R.color.yellow);
         }
         else
@@ -353,9 +355,9 @@ public class home_screen extends AppCompatActivity{
         for(working_time time_range: working_time_list){
             Date start = time_range.get_from();
             Date end = time_range.get_end();
-//            Log.i("Time_now", df3.format(now));
-//            Log.i("Time_start", df3.format(start));
-//            Log.i("Time_end", df3.format(end));
+            Log.i("Time_now", df3.format(now));
+            Log.i("Time_start", df3.format(start));
+            Log.i("Time_end", df3.format(end));
             if(now.before(end)&&now.after(start))
                 Log.i("Time_end", "True!");
                 return true;

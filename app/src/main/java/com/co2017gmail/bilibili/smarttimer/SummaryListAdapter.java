@@ -81,7 +81,11 @@ public class SummaryListAdapter extends RecyclerView.Adapter<SummaryListAdapter.
         Context context= viewHolder.getDate().getContext();
         viewHolder.getDate().setText(mSummaryList.get(position).dateTime);
         Integer score = (mSummaryList.get(position).score);
-        viewHolder.getScore().setText(score.toString());
+        if (score < 0) {
+            viewHolder.getScore().setText(0);
+        }else {
+            viewHolder.getScore().setText(score.toString());
+        }
         viewHolder.getScore().setTextColor(ContextCompat.getColor(context, getTextColor(score)));
         viewHolder.getEvaluation().setText(getEvaluation(score));
         viewHolder.getEvaluation().setTextColor(ContextCompat.getColor(context, getTextColor(score)));
@@ -98,10 +102,10 @@ public class SummaryListAdapter extends RecyclerView.Adapter<SummaryListAdapter.
 
     private  int getTextColor(int progress){
         int result;
-        if(0<= progress && progress <65){
+        if(progress <30){
             result = R.color.red;
         }
-        else if(65<= progress && progress <80){
+        else if(30<= progress && progress <80){
             result = R.color.yellow;
         }
         else
@@ -111,10 +115,10 @@ public class SummaryListAdapter extends RecyclerView.Adapter<SummaryListAdapter.
 
     private  String getEvaluation(int progress){
         String result;
-        if(0<= progress && progress <65){
+        if(progress <30){
             result = "Bad!";
         }
-        else if(65<= progress && progress <80){
+        else if(30<= progress && progress <80){
             result = "Good!";
         }
         else

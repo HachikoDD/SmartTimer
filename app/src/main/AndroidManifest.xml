@@ -2,9 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.co2017gmail.bilibili.smarttimer">
-
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" >
-        </uses-permission>
+    </uses-permission>
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore = "ProtectedPermissions">
     </uses-permission>
@@ -41,6 +40,10 @@
         <activity android:name=".detail_summary"></activity>
         <activity android:name=".EditActivity"></activity>
 
+
+
     </application>
+
+
 
 </manifest>

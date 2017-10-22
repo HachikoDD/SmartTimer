@@ -66,7 +66,7 @@ public class calendar extends AppCompatActivity{
             events_today = (ArrayList<Events>) eventsDB.findAll(getApplicationContext());
 
         for(Events events: events_today){
-
+            working_time_list = new ArrayList<>();
             if(events.eventStatusTime.equals("ON")) {
                 events_today_filter.add(events);
                 Log.i("Event_NAME:", events.eventName);
