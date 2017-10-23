@@ -292,6 +292,8 @@ public class me extends AppCompatActivity implements View.OnClickListener {
         if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
             Uri selectedImage = data.getData();
             profile.setImageURI(selectedImage);
+            user.avator = selectedImage.toString();
+            UserDB.update(this,user);
         }
     }
 
