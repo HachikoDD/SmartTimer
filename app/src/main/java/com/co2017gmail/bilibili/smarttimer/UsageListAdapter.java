@@ -117,7 +117,7 @@ public class UsageListAdapter extends RecyclerView.Adapter<UsageListAdapter.View
         App app = applicationDB.find(context, appname);
         app.usage = mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground();
         applicationDB.update(context, app);
-        usage.totalUsage = mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground();
+        usage.totalUsage = usage.totalUsage+mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground();
         usageDB.update(context, usage);
         viewHolder.getLastTimeUsed().setText(toUsageTime(mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground()));
         viewHolder.getAppIcon().setImageDrawable(mCustomUsageStatsList.get(position).appIcon);

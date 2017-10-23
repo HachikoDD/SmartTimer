@@ -366,7 +366,6 @@ public class me extends AppCompatActivity implements View.OnClickListener {
                         }
                     }
                     else{
-                        Log.i("Back_ground_RUNING_NO", app_name_top);
                         if (disturbing_app_list.contains(app_name_top)&&today_uasge!=null) {
                             String min = toUsageTime_Min(today_uasge.totalUsage, user_set_limiation).toString() + "m";
                             String sceond = toUsageTime_Sceond(today_uasge.totalUsage, user_set_limiation).toString() + "s";

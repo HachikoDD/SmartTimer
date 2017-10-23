@@ -27,8 +27,6 @@ import java.util.Locale;
 
 public class home_screen extends AppCompatActivity{
 
-    private TextView txtTimerHour, txtTimerMinute, txtTimerSecond;
-    private TextView tvEvent, tvDate;
     private Handler handler;
     private Runnable runnable;
     public Handler handler_back;
@@ -55,14 +53,10 @@ public class home_screen extends AppCompatActivity{
         setContentView(R.layout.activity_home_screen);
         ArrayList<Events> events_today = new ArrayList<>();
         ArrayList<Events> events_today_filter = new ArrayList<>();
-        working_time_list = new ArrayList<>();
         Context context = getApplicationContext();
         if(eventsDB.findAll(getApplicationContext())!=null)
             events_today = (ArrayList<Events>) eventsDB.findAll(getApplicationContext());
         user_set_limiation = userDB.find(getApplicationContext(),"BiliBili").dailyUsageLimit * 60;
-
-//        min_left.setText(toUsageTime_Min(usageDB.find(getApplicationContext(), dateTime).totalUsage, user_set_limiation).toString() + "m");
-//        second_left.setText(toUsageTime_Sceond(usageDB.find(getApplicationContext(), dateTime).totalUsage, user_set_limiation).toString() + "s");
 
 
 //        Usage usage = new Usage();
@@ -84,9 +78,8 @@ public class home_screen extends AppCompatActivity{
 //            }
 
 
-
+        working_time_list = new ArrayList<>();
         for(Events events: events_today){
-            working_time_list = new ArrayList<>();
             if(events.eventStatusTime.equals("ON")) {
                 events_today_filter.add(events);
                 Log.i("Event_NAME:", events.eventName);
@@ -102,9 +95,9 @@ public class home_screen extends AppCompatActivity{
             }
         }
 
-//        for(working_time working_time: working_time_list){
-//            Log.i("Event_TIME:", working_time.get_from() + " TO " + working_time.get_end());
-//        }
+        for(working_time working_time: working_time_list){
+            Log.i("Event_TIME:", working_time.get_from() + " TO " + working_time.get_end());
+        }
 
 
         if(savedInstanceState == null){
@@ -211,6 +204,7 @@ public class home_screen extends AppCompatActivity{
                     }else{
                         min_left.setText(toUsageTime_Min(usageDB.find(getApplicationContext(), dateTime).totalUsage, user_set_limiation).toString() + "m");
                         second_left.setText(toUsageTime_Sceond(usageDB.find(getApplicationContext(), dateTime).totalUsage, user_set_limiation).toString() + "s");
+                        wait(500);
                         handler.removeCallbacks(runnable);
                     }
                 } catch (Exception e) {
@@ -229,6 +223,7 @@ public class home_screen extends AppCompatActivity{
                 public void run() {
                     for (App app : applicationDB.findAll(getApplicationContext())) {
                         if (app.monitorSwitch) {
+                            Log.i("disturbing_app", app.name);
                             disturbing_app_list.add(app.name);
                         }
                     }

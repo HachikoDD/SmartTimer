@@ -230,8 +230,8 @@ public class schedule extends AppCompatActivity {
         }
         else{
             Events events = eventsDB.find(getApplicationContext(),name);
-            events.eventStartTime = "22/10/17/00/00";
-            events.eventFinishTime = "22/10/17/10/00";
+            events.eventStartTime = "23/10/17/00/00";
+            events.eventFinishTime = "23/10/17/23/59";
             eventsDB.update(getApplicationContext(),events);
         }
     }
@@ -247,8 +247,8 @@ public class schedule extends AppCompatActivity {
         }
         else{
             Events events = eventsDB.find(getApplicationContext(),name);
-            events.eventStartTime = "22/10/17/13/01";
-            events.eventFinishTime = "22/10/17/15/00";
+            events.eventStartTime = "23/10/17/13/01";
+            events.eventFinishTime = "23/10/17/15/00";
             eventsDB.update(getApplicationContext(),events);
         }
     }
@@ -264,8 +264,8 @@ public class schedule extends AppCompatActivity {
         }
         else{
             Events events = eventsDB.find(getApplicationContext(),name);
-            events.eventStartTime = "22/10/17/15/00";
-            events.eventFinishTime = "22/10/17/17/00";
+            events.eventStartTime = "23/10/17/15/00";
+            events.eventFinishTime = "23/10/17/17/00";
             eventsDB.update(getApplicationContext(),events);
         }
     }
@@ -281,8 +281,8 @@ public class schedule extends AppCompatActivity {
         }
         else{
             Events events = eventsDB.find(getApplicationContext(),name);
-            events.eventStartTime = "22/10/17/20/00";
-            events.eventFinishTime = "22/10/17/23/00";
+            events.eventStartTime = "23/10/17/20/00";
+            events.eventFinishTime = "23/10/17/23/00";
             eventsDB.update(getApplicationContext(),events);
         }
     }
